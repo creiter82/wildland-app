@@ -1,6 +1,32 @@
-<ul>
-  <% @personnels.each do |personnel| %>
-    <li><%= personnel.first_name %></li>
-    <li><%= personnel.last_name %></li>
-  <% end %>
-</ul>
+<% if @personnels.size > 0 %>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <h2>Roster</h2>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Email</th> 
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @personnels.each do |personnel| %>
+                <tr>
+                    <td><%= personnel.full_name.titleize %></td>
+                    <td><%= number_to_phone(personnel.phone, area_code: true) %></td>
+                    <td><%= personnel.email %></td>
+                    <% if personnel.id == current_personnel.id %>
+                        <td>
+                            <%= link_to 'Delete', personnel_path(personnel), 
+                                                  :method => :delete, 
+                                                  :data => { :confirm => "Are you sure?" }, 
+                                                  :class => "btn btn-xs btn-danger" %>
+                        </td>
+                    <% end %>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% end %>
