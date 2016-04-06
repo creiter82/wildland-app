@@ -1,42 +1,63 @@
-<div class="panel panel-default devise-bs">
+
   
-  <div class="panel-body">
+<div class="col-md-6 col-md-offset-3">
     <%= form_for(@personnel, :html => {class: "form-horizontal", role: "form"}) do |f| %>
       <div class="form-group">
-        <%= f.label :first_name %>
-        <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+        <%= f.label :first_name, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+            <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+        </div>    
       </div>
       <div class="form-group">
-        <%= f.label :last_name %>
-        <%= f.text_field :last_name, class: "form-control" %>
+        <%= f.label :last_name, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+            <%= f.text_field :last_name, class: "form-control" %>
+        </div>
       </div>
       <div class="form-group">
-        <%= f.label :phone %>
-        <%= f.text_field :phone, class: "form-control" %>
+        <%= f.label :phone, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+            <%= f.text_field :phone, class: "form-control" %>
+        </div>
       </div>
       <div class="form-group">
-        <%= f.label :email %>
-        <%= f.email_field :email, :autocomplete => "off", class: "form-control" %>
+        <%= f.label :email, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+            <%= f.email_field :email, :autocomplete => "off", class: "form-control" %>
+        </div>
       </div>
       <div class="form-group">
-        <%= f.label :password %> 
-        <%= f.password_field :password, :autocomplete => "off", class: "form-control" %>
+        <%= f.label :password, class: "col-sm-4 control-label" %> 
+        <div class="col-sm-8">
+            <%= f.password_field :password, :autocomplete => "off",
+                                placeholder: "Leave blank if not changing password", 
+                                class: "form-control" %>
+        </div>
       </div>
       <div class="form-group">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, class: "form-control"  %>
+        <%= f.label :password_confirmation, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+            <%= f.password_field :password_confirmation,
+                             placeholder: "Leave blank if not changing password",
+                             class: "form-control"  %>
+        </div>
       </div>
       <div class="form-group">
-        <%= f.label :current_password %>
-        <%= f.password_field :current_password, class: "form-control" %>
+        <%= f.label :current_password, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+            <%= f.password_field :current_password, class: "form-control" %>
+        </div>
       </div>
       <% if current_personnel.admin? %>
           <div class="form-group">
-              <%= f.label :admin %>
-              <%= f.check_box :admin %>
+              <%= f.label :admin, class: "col-sm-4 control-label" %>
+              <div class="col-sm-8">
+                  <%= f.check_box :admin, class: "form-control" %>
+              </div>
           </div>
       <% end %>
-      <%= f.submit "Upate Personnel", class: "btn btn-primary" %>
+      <div class="col-sm-4 col-sm-offset-4">
+          <%= f.submit "Upate Personnel", class: "btn btn-primary" %>
+      </div>
     <% end %>
-  </div>
-</div>
+</div>    

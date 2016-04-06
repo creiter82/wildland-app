@@ -56,14 +56,7 @@ class PersonnelsController < ApplicationController
         end
     end
     
-    def is_admin?
-       @personnel = Personnel.find(params[:id])
-       if @personnel.admin?
-       else
-           redirect_to(personnels_path)
-           flash[:danger] = "Must be Admin to delete personnel"
-       end
-    end
+    
     
     def current_personnel?(personnel)
         personnel == current_personnel
