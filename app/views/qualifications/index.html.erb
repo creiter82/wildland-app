@@ -1,0 +1,33 @@
+<% if @qualifications.size > 0 %>
+    <h1>Qualifications</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Abbr.</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @qualifications.each do |qual| %>
+                <tr>
+                    <td><%= qual.name.titleize %></td>
+                    <td><%= qual.acronym.upcase %></td>
+                    <td>
+                        <% if current_personnel.admin? %>
+                            <%= link_to 'Edit', edit_qualification_path(qual), 
+                                                :class => "btn btn-xs btn-primary" %>
+                            <%= link_to 'Delete', qualification_path(qual), 
+                                        :method => :delete, 
+                                        :data => { :confirm => "Are you sure you want to delete #{qual.name}?" }, 
+                                        :class => "btn btn-xs btn-danger" %>
+                        <% end %>                        
+                    </td>
+                        
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% end %>
+
+<%= link_to "New Qual", new_qualification_path, class: "btn btn-s btn-primary" %>

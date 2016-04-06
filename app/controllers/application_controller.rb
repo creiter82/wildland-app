@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
   private
   
     def is_admin?
-       @personnel = Personnel.find(params[:id])
+       @personnel = current_personnel
        if @personnel.admin?
        else
-           redirect_to(personnels_path)
-           flash[:danger] = "Must be Admin to delete personnel"
+           redirect_to(root_path)
+           flash[:danger] = "Must be an Admin to view"
        end
     end
   
