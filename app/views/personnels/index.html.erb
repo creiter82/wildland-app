@@ -17,14 +17,19 @@
                     <td><%= personnel.full_name.titleize %></td>
                     <td><%= number_to_phone(personnel.phone, area_code: true) %></td>
                     <td><%= personnel.email %></td>
-                    <% if personnel.id == current_personnel.id %>
-                        <td>
+                    <td>
+                        <% if current_personnel == personnel || current_personnel.admin? %>
+                            <%= link_to 'Edit', edit_personnel_path(personnel), 
+                                                :class => "btn btn-xs btn-primary" %>
+                        <% end %>
+                        <% if current_personnel.admin? %>
                             <%= link_to 'Delete', personnel_path(personnel), 
-                                                  :method => :delete, 
-                                                  :data => { :confirm => "Are you sure?" }, 
-                                                  :class => "btn btn-xs btn-danger" %>
-                        </td>
-                    <% end %>
+                                        :method => :delete, 
+                                        :data => { :confirm => "Are you sure you want to delete #{personnel.full_name}?" }, 
+                                        :class => "btn btn-xs btn-danger" %>
+                        <% end %>                        
+                    </td>
+                        
                 </tr>
             <% end %>
         </tbody>
