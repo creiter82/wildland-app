@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  
   devise_for :personnels,:path => "personnel", :controllers => { registrations: 'registrations' }
-  resources :personnels, :path => "personnel", only: [:index, :edit, :update, :destroy]
+  resources :personnels, :path => "personnel", only: [:index, :edit, :update, :show, :destroy]
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -8,6 +10,7 @@ Rails.application.routes.draw do
   root 'pages#index'
   
   resources :qualifications
+  resources :personnel_qualifications, except: [:show, :edit, :update]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

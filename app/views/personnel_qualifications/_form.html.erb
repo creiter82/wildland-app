@@ -1,0 +1,25 @@
+<%= form_for(@personnel_qualification) do |f| %>
+  <% if @personnel_qualification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@personnel_qualification.errors.count, "error") %> prohibited this personnel_qualification from being saved:</h2>
+
+      <ul>
+      <% @personnel_qualification.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :personnel_id %><br>
+    <%= f.number_field :personnel_id %>
+  </div>
+  <div class="field">
+    <%= f.label :qualification_id %><br>
+    <%= f.number_field :qualification_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -8,6 +8,7 @@ class PersonnelsController < ApplicationController
   
   def edit
       @personnel = Personnel.find(params[:id])
+      @quals = Qualification.all
   end
   
   def update
@@ -29,6 +30,10 @@ class PersonnelsController < ApplicationController
         render 'edit'
 
       end
+  end
+  
+  def show
+      @personnel = Personnel.find(params[:id])
   end
       
   def destroy

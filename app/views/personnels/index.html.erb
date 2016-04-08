@@ -6,6 +6,7 @@
                 <th>Name</th>
                 <th>Phone Number</th>
                 <th>Email</th> 
+                <th>Quals</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -16,6 +17,18 @@
                     <td><%= number_to_phone(personnel.phone, area_code: true) %></td>
                     <td><%= personnel.email %></td>
                     <td>
+                    <% if personnel.qualifications.size > 0 %>
+                        <ul>
+                            <% personnel.qualifications.each do |qual| %>
+                                <li>
+                                    <%= qual.acronym.upcase %>
+                                </li>
+                            <% end %>
+                        </ul>
+                    <% end %>
+                    </td>
+                    <td>
+                        <%= link_to 'Show', personnel_path(personnel.id) %>
                         <% if current_personnel == personnel || current_personnel.admin? %>
                             <%= link_to 'Edit', edit_personnel_path(personnel), 
                                                 :class => "btn btn-xs btn-primary" %>

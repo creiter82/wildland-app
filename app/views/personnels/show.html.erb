@@ -1,0 +1,3 @@
+<h2><%= @personnel.full_name.titleize %></h2>
+<p><strong>Phone </strong><span><%= number_to_phone(@personnel.phone, area_code: true) %></span></p>
+<p>Email <span><%= @personnel.email %></span></p>
