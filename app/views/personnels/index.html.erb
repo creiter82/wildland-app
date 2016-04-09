@@ -1,48 +1,50 @@
 <% if @personnels.size > 0 %>
-    <h1>Roster</h1>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Phone Number</th>
-                <th>Email</th> 
-                <th>Quals</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @personnels.each do |personnel| %>
+    <div class="personnel-listing">
+        <h1>Roster</h1>
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td><%= personnel.full_name.titleize %></td>
-                    <td><%= number_to_phone(personnel.phone, area_code: true) %></td>
-                    <td><%= personnel.email %></td>
-                    <td>
-                    <% if personnel.qualifications.size > 0 %>
-                        <ul>
-                            <% personnel.qualifications.each do |qual| %>
-                                <li>
-                                    <%= qual.acronym.upcase %>
-                                </li>
-                            <% end %>
-                        </ul>
-                    <% end %>
-                    </td>
-                    <td>
-                        <%= link_to 'Show', personnel_path(personnel.id) %>
-                        <% if current_personnel == personnel || current_personnel.admin? %>
-                            <%= link_to 'Edit', edit_personnel_path(personnel), 
-                                                :class => "btn btn-xs btn-primary" %>
-                        <% end %>
-                        <% if current_personnel.admin? %>
-                            <%= link_to 'Delete', personnel_path(personnel), 
-                                        :method => :delete, 
-                                        :data => { :confirm => "Are you sure you want to delete #{personnel.full_name}?" }, 
-                                        :class => "btn btn-xs btn-danger" %>
-                        <% end %>                        
-                    </td>
-                        
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th> 
+                    <th>Quals</th>
+                    <th>Actions</th>
                 </tr>
-            <% end %>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <% @personnels.each do |personnel| %>
+                    <tr>
+                        <td><%= personnel.full_name.titleize %></td>
+                        <td><%= number_to_phone(personnel.phone, area_code: true) %></td>
+                        <td><%= personnel.email %></td>
+                        <td>
+                        <% if personnel.qualifications.size > 0 %>
+                            <ul>
+                                <% personnel.qualifications.each do |qual| %>
+                                    <li>
+                                        <%= qual.acronym.upcase %>
+                                    </li>
+                                <% end %>
+                            </ul>
+                        <% end %>
+                        </td>
+                        <td>
+                            <%= link_to 'Show', personnel_path(personnel.id) %>
+                            <% if current_personnel == personnel || current_personnel.admin? %>
+                                <%= link_to 'Edit', edit_personnel_path(personnel), 
+                                                    :class => "btn btn-xs btn-primary" %>
+                            <% end %>
+                            <% if current_personnel.admin? %>
+                                <%= link_to 'Delete', personnel_path(personnel), 
+                                            :method => :delete, 
+                                            :data => { :confirm => "Are you sure you want to delete #{personnel.full_name}?" }, 
+                                            :class => "btn btn-xs btn-danger" %>
+                            <% end %>                        
+                        </td>
+                            
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>    
 <% end %>
