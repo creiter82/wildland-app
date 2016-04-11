@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 
 gem 'rails',        '4.2.5'
 gem 'devise'
+gem 'therubyracer'
+gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views'
 gem 'sass-rails',   '~> 5.0'

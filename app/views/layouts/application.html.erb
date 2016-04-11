@@ -51,20 +51,48 @@
 
     <div class="navbar navbar-default navbar-static-top">
       <div class="container">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" 
+                              data-target=".navbar-responsive-collapse">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <%= link_to(image_tag("AFR_Logo_Small.png"), root_url, class: "pull-left logo") %>
+        <%= link_to(image_tag("AFR_Logo_Small.png"), root_url, 
+                                                    class: "pull-left logo") %>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to "Personnel", personnels_path  %></li>
-            <li><%= link_to "Link2", "/path2"  %></li>
+            <% if current_personnel %>
+              <li><%= link_to "Personnel", personnels_path  %></li>
+              <li><%= link_to "Link2", "/path2"  %></li>
+            <% end %>  
             <% if current_personnel && current_personnel.admin? %>
               <li><%= link_to "Qualifications", qualifications_path  %></li>
             <% end %>  
           </ul>
+          
+          <% if current_personnel %>
+          <ul class="nav logout navbar-right navbar-btn">
+            <li>
+                <%= link_to "logout", destroy_personnel_session_path, 
+                                      method: :delete,
+                                      class: "btn btn-xs btn-danger" %>
+            </li>
+          </ul>
+          <ul class="nav navbar-right user-name navbar-btn">
+            <li>
+              <i class="fa fa-user"></i>
+              <%= current_personnel.full_name.present? ? current_personnel.full_name : current_personnel.email %>
+            </li>
+          </ul>
+          <% else %>
+          <ul class="nav login pull-right">
+            <li>
+                <%= link_to "log in", new_personnel_session_path,
+                                      class: "btn btn-xs btn-primary navbar-btn" %>
+            </li>
+          </ul>
+          <% end %>
+          
         </div>
       </div>
     </div>

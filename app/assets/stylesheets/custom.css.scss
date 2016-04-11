@@ -1,15 +1,62 @@
 /* Global Styles */
 
-.navbar {
-    
+/*.navbar {
+    .navbar-nav li a {
+        line-height: 65px;
+    }
+}*/
+
+@media (min-width: 768px) {
+    .navbar .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
-.navbar-nav li a {
-    padding-top: 50px;
+@media (max-width: 768px) {
+    .navbar {
+        .navbar-nav li a {
+            /*line-height: 1em;*/
+        }
+        .user-name {
+            margin-top: 0;
+            padding-top: 0;
+        }
+        .logout {
+            width: 100px;
+            margin-top: 0;
+        }
+        .login {
+            .btn {
+                clear: none;
+                float: left;
+            }
+        }
+    }
+}
+
+.logo {
+    padding-left: 0;
+    margin-left: 0;
+    &:hover {
+        background: none;
+    }
 }
 
 .btn:visited {
   color: #fff;
+}
+
+/* Homepage */
+
+.jumbotron {
+    background-image: asset-url('jumbotron.jpg');
+    background-size: cover;
+    text-align: center;
+    h1 {
+        color: #444444;
+        font-weight: light;
+    }
 }
 
 /* Personnel */
