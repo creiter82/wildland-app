@@ -78,17 +78,17 @@
                                       class: "btn btn-xs btn-danger" %>
             </li>
           </ul>
-          <ul class="nav navbar-right user-name navbar-btn">
+          <ul class="nav user-name navbar-right navbar-btn">
             <li>
               <i class="fa fa-user"></i>
               <%= current_personnel.full_name.present? ? current_personnel.full_name : current_personnel.email %>
             </li>
           </ul>
           <% else %>
-          <ul class="nav login pull-right">
+          <ul class="nav login navbar-right navbar-btn">
             <li>
                 <%= link_to "log in", new_personnel_session_path,
-                                      class: "btn btn-xs btn-primary navbar-btn" %>
+                                      class: "btn btn-xs btn-primary" %>
             </li>
           </ul>
           <% end %>
