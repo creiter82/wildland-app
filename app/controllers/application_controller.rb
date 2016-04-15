@@ -14,5 +14,14 @@ class ApplicationController < ActionController::Base
            flash[:danger] = "Must be an Admin to view"
        end
     end
+    
+    def is_admin?
+       @personnel = Personnel.find(params[:id])
+       if @personnel.admin?
+       else
+           redirect_to(personnels_path)
+           flash[:danger] = "Must be Admin to delete personnel"
+       end
+    end
   
 end
