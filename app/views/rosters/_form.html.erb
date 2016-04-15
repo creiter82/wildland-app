@@ -1,0 +1,41 @@
+
+  <% if @roster.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@roster.errors.count, "error") %> prohibited this roster from being saved:</h2>
+
+      <ul>
+      <% @roster.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+  <div class="col-md-6">
+    <%= form_for(@roster, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+      <div class="form-group">
+        <%= f.label :name, class: "col-sm-4 control-label" %>
+        <div class="col-sm-4">
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :start_time, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.datetime_select :start_time, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :end_time, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.datetime_select :end_time, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-sm-4 col-sm-offset-4">
+        <%= f.submit 'Add Roster', class: "btn btn-xs btn-primary" %>
+        <%= link_to 'Back', rosters_path %>
+      </div>
+    <% end %>
+  </div>
+</div>  

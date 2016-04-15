@@ -1,0 +1,49 @@
+<%= month_calendar events: @rosters do |date, rosters| %>
+  <%= date.strftime("%d") %>
+
+  <% rosters.each do |roster| %>
+    <div>
+      <strong><%= link_to roster.name.titleize, roster_path(roster) %></strong>
+    </div>
+  <% end %>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<h1 class="roster-h1">Current Rosters</h1>
+
+<table class="table table-striped roster-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rosters.each do |roster| %>
+      <% if roster.start_time >= Date.today.beginning_of_week %>
+        <tr>
+          <td><%= roster.name.titleize %></td>
+          <td><%= roster.start_time.strftime("%m/%d/%Y") %></td>
+          <td><%= roster.end_time.strftime("%m/%d/%Y") %></td>
+          <td>
+            <%= link_to 'View', roster, class: "btn btn-xs btn-primary" %>
+            <%= link_to 'Edit', edit_roster_path(roster), 
+                                class: "btn btn-xs btn-success" %>
+            <% if current_personnel.admin? %>                    
+              <%= link_to 'Destroy', roster, method: :delete, 
+                                  class: "btn btn-xs btn-danger", 
+                                  data: { confirm: 'Are you sure?' } %>
+            <% end %>                      
+          </td>
+        </tr>
+      <% end %>  
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'New Roster', new_roster_path, class: "btn btn-xs btn-primary" %>
+
+

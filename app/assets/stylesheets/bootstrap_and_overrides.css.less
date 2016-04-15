@@ -63,3 +63,40 @@
     }
 }
 
+.simple-calendar {
+    margin-bottom: 60px;
+    a {
+        color: @link-color;
+        &:hover {
+            color: @link-hover-color;
+            background: none;
+            text-decoration: none;
+        }
+        &:visited {
+            color: @link-color;
+        }
+    }
+    .today {
+        background-color: @brand-primary;
+    }
+    .has-events {
+        background-color: @brand-danger;
+        a {
+            color: @white;
+            &:hover {
+                color: @gray;
+            }
+        }
+    }
+}
+
+form {
+    a {
+        &:hover {
+            color: @link-hover-color !important;
+            background: none !important;
+            text-decoration: none;
+        }
+    }
+}
+

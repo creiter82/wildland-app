@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406212712) do
+ActiveRecord::Schema.define(version: 20160415204253) do
 
   create_table "personnel_qualifications", force: :cascade do |t|
     t.integer  "personnel_id"
@@ -50,5 +50,13 @@ ActiveRecord::Schema.define(version: 20160406212712) do
   end
 
   add_index "qualifications", ["name"], name: "index_qualifications_on_name", unique: true
+
+  create_table "rosters", force: :cascade do |t|
+    t.text     "name"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
