@@ -1,6 +1,5 @@
 class RostersController < ApplicationController
-  before_action :authenticate_personnel!
-  skip_before_action :authenticate_personnel!, only: [:show]
+  before_action :authenticate_personnel!, except: [:show]
   before_action :set_roster, only: [:show, :edit, :update, :destroy]
   before_action :is_admin?, only: [:destroy]
 

@@ -1,4 +1,5 @@
 class PersonnelsController < ApplicationController
+    before_action :authenticate_personnel!
     before_action :is_admin?,    only: [:destroy]
     before_action :able_to_edit, only: [:edit, :update]
 
