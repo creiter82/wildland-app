@@ -1,6 +1,6 @@
 class PersonnelsController < ApplicationController
-    before_action :is_admin?, only: [:destroy]
-    before_action :able_to_edit,   only: [:edit, :update]
+    before_action :is_admin?,    only: [:destroy]
+    before_action :able_to_edit, only: [:edit, :update]
 
   def index
     @personnels = Personnel.all
