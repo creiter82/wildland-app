@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415204253) do
+ActiveRecord::Schema.define(version: 20160422202235) do
+
+  create_table "apparatus", force: :cascade do |t|
+    t.string   "designator"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.text     "apparatus_class"
+    t.integer  "apparatus_type"
+  end
 
   create_table "personnel_qualifications", force: :cascade do |t|
     t.integer  "personnel_id"

@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @apparatu.designator.titleize %>
+</p>
+
+<%= link_to 'Edit', edit_apparatu_path(@apparatu) %> |
+<%= link_to 'Back', apparatus_path %>

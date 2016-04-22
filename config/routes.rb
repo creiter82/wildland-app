@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :apparatus
   devise_for :personnels,:path => "personnel", :controllers => { registrations: 'registrations' }
   resources :personnels, :path => "personnel", only: [:index, :edit, :update, :show, :destroy]
   

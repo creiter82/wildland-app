@@ -1,0 +1,42 @@
+<div class="row">  
+  <% if @apparatu.errors.any? %>
+    <div class="col-md-4 alert alert-danger">
+      <ul>
+      <% @apparatu.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>  
+
+<div class="row">
+  <div class="col-md-6">
+    <%= form_for(@apparatu, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+      <div class="form-group">
+        <%= f.label :designator, class: "col-sm-4 control-label" %>
+        <div class="col-sm-4">
+          <%= f.text_field :designator, :placeholder => "B13, E113, T13...", autofocus: "true", class: "form-control" %>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <%=f.label :apparatus_class, class: "col-sm-4 control-label" %>
+        <div class="col-sm-4">
+          <%= f.select(:apparatus_class, options_for_select([['Engine'], ['Tender']]), {}, {class: "form-control"}) %>
+        </div>  
+      </div>
+      <div class="form-group">
+        <%=f.label :apparatus_type, class: "col-sm-4 control-label" %>
+        <div class="col-sm-4">
+          <%= f.select(:apparatus_type, options_for_select([[1], [2], [3], [4], [5], [6]]), {}, {class: "form-control"}) %>
+        </div>  
+      </div>
+      
+      <div class="col-sm-4 col-sm-offset-4">
+        <%= f.submit btn_name, class: "btn btn-xs btn-primary" %> | 
+        <%= link_to 'Back', apparatus_path %>
+      </div>
+    <% end %>
+  </div>  
+</div>

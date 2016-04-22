@@ -1,0 +1,30 @@
+<h1>Current Apparatus</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Class</th>
+      <th>Type</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @apparatus.each do |apparatu| %>
+      <tr>
+        <td><%= apparatu.designator.titleize %></td>
+        <td><%= apparatu.apparatus_class.capitalize %></td>
+        <td><%= apparatu.apparatus_type %></td>
+        <td>
+          <%= link_to 'Edit', edit_apparatu_path(apparatu), class: "btn btn-xs btn-primary" %>
+          <%= link_to 'Destroy', apparatu, method: :delete, class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Apparatus', new_apparatu_path, class: "btn btn-xs btn-primary" %>

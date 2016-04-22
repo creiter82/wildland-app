@@ -1,0 +1,2 @@
+module ApparatusHelper
+end
