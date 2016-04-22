@@ -6,13 +6,13 @@
 </p>
 
 <p>
-  <strong>Start time:</strong>
-  <%= @roster.start_time %>
+  <strong>Start Date:</strong>
+  <%= @roster.start_time.strftime("%m/%d/%Y") %>
 </p>
 
 <p>
-  <strong>End time:</strong>
-  <%= @roster.end_time %>
+  <strong>End Date:</strong>
+  <%= @roster.end_time.strftime("%m/%d/%Y") %>
 </p>
 
 <% if current_personnel && current_personnel.admin? %>
