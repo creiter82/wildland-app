@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160422202235) do
+ActiveRecord::Schema.define(version: 20160422231949) do
 
   create_table "apparatus", force: :cascade do |t|
     t.string   "designator"
@@ -58,6 +58,13 @@ ActiveRecord::Schema.define(version: 20160422202235) do
   end
 
   add_index "qualifications", ["name"], name: "index_qualifications_on_name", unique: true
+
+  create_table "roster_apparatus", force: :cascade do |t|
+    t.integer  "apparatu_id"
+    t.integer  "roster_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "rosters", force: :cascade do |t|
     t.text     "name"

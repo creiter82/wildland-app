@@ -12,15 +12,18 @@ class RostersController < ApplicationController
   # GET /rosters/1
   # GET /rosters/1.json
   def show
+    @roster = Roster.find(params[:id])
   end
 
   # GET /rosters/new
   def new
     @roster = Roster.new
+    @apparatus = Apparatu.all
   end
 
   # GET /rosters/1/edit
   def edit
+    @apparatus = Apparatu.all
   end
 
   # POST /rosters
@@ -71,6 +74,6 @@ class RostersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def roster_params
-      params.require(:roster).permit(:name, :start_time, :end_time)
+      params.require(:roster).permit(:name, :start_time, :end_time, apparatu_ids:[])
     end
 end

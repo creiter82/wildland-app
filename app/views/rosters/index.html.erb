@@ -18,6 +18,7 @@
       <th>Name</th>
       <th>Start Date</th>
       <th>End Date</th>
+      <th>Apparatus</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -29,6 +30,13 @@
           <td><%= roster.name.titleize %></td>
           <td><%= roster.start_time.strftime("%m/%d/%Y") %></td>
           <td><%= roster.end_time.strftime("%m/%d/%Y") %></td>
+          <td>
+            <% if roster.apparatus.size > 0 %>
+              <% roster.apparatus.each do |app| %>
+                <%= app.designator.titleize %>
+              <% end %>  
+            <% end %>
+          </td>
           <td>
             <%= link_to 'View', roster, class: "btn btn-xs btn-primary" %>
             <% if current_personnel %>
