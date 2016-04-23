@@ -8,6 +8,7 @@
                     <th>Phone Number</th>
                     <th>Email</th> 
                     <th>Quals</th>
+                    <th>Single Resource</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -27,6 +28,11 @@
                                 <% end %>
                             </ul>
                         <% end %>
+                        </td>
+                        <td class="text-center">
+                            <% if personnel.single_resource == true %>
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            <% end %>
                         </td>
                         <td>
                             <%= link_to 'Show', personnel_path(personnel.id) %>
