@@ -13,8 +13,8 @@ class Apparatu < ActiveRecord::Base
     self.apparatus_class.downcase!
   end
   
-  def designator
-    self[:designator].titleize
-  end
+  #def designator
+  #  self[:designator].titleize
+  #end
     
 end

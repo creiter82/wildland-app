@@ -27,9 +27,9 @@
 
 <% if current_personnel && current_personnel.admin? %>
   <%= link_to 'Edit', edit_roster_path(@roster), class: "btn btn-xs btn-primary" %> | 
-  <%= link_to 'Back', rosters_path %>
+  <%= link_to 'Back', rosters_path, class: "no-bg" %>
 <% elsif current_personnel %>
-  <%= link_to 'Back', rosters_path %>
+  <%= link_to 'Back', rosters_path, class: "no-bg" %>
 <% else %>
-  <%= link_to 'Back', root_path %>
+  <%= link_to 'Back', root_path, class: "no-bg" %>
 <% end %>  

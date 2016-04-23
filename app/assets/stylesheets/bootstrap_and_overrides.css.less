@@ -34,6 +34,18 @@
 @white: #fff;
 @navbar-height: 100px;
 
+.no-bg {
+    color: @link-color;
+    &:hover {
+        color: @link-hover-color !important;
+        background: none;
+        text-decoration: none;
+    }
+    &:visited {
+        color: @link-color;
+    }
+}
+
 .navbar {
     .btn {
         padding: 6px 8px;
@@ -102,6 +114,12 @@ form {
             background: none !important;
             text-decoration: none;
         }
+    }
+}
+
+.personnel-listing {
+    .fa-check {
+        color: @brand-success;
     }
 }
 

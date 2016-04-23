@@ -8,7 +8,7 @@
                     <th>Phone Number</th>
                     <th>Email</th> 
                     <th>Quals</th>
-                    <th>Single Resource</th>
+                    <th class="text-center">Single Resource</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -35,7 +35,7 @@
                             <% end %>
                         </td>
                         <td>
-                            <%= link_to 'Show', personnel_path(personnel.id) %>
+                            <%= link_to 'Show', personnel_path(personnel.id), class: "no-bg" %>
                             <% if current_personnel == personnel || current_personnel.admin? %>
                                 <%= link_to 'Edit', edit_personnel_path(personnel), 
                                                     :class => "btn btn-xs btn-primary" %>
