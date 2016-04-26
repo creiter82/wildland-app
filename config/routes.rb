@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :qualifications
   resources :personnel_qualifications, except: [:show, :edit, :update]
   resources :rosters, :path => "roster"
+  resources :positions
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
