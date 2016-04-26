@@ -14,6 +14,7 @@ class PersonnelsController < ApplicationController
   
   def update
       @personnel = Personnel.find(params[:id])
+      @quals = Qualification.all
       
       if params[:personnel][:password].blank?
         params[:personnel].delete(:password)
@@ -40,7 +41,7 @@ class PersonnelsController < ApplicationController
   def destroy
      @personnel = Personnel.find(params[:id]) 
      @personnel.destroy
-     flash[:danger] = "#{@personnel.full_name} has been deleted?"
+     flash[:success] = "#{@personnel.full_name.titleize} has been deleted?"
      redirect_to personnels_path
   end
   
@@ -64,8 +65,7 @@ class PersonnelsController < ApplicationController
     end
     
     def is_admin?
-       @personnel = Personnel.find(params[:id])
-       if @personnel.admin?
+       if current_personnel.admin?
        else
            redirect_to(personnels_path)
            flash[:danger] = "Must be Admin to delete personnel"

@@ -3,7 +3,7 @@ class Personnel < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :personnel_qualifications
+  has_many :personnel_qualifications, dependent: :destroy
   has_many :qualifications, through: :personnel_qualifications
   validates_presence_of :first_name, :last_name
   validates :phone,:presence => true,

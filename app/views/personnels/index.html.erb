@@ -43,7 +43,7 @@
                             <% if current_personnel.admin? %>
                                 <%= link_to 'Delete', personnel_path(personnel), 
                                             :method => :delete, 
-                                            :data => { :confirm => "Are you sure you want to delete #{personnel.full_name}?" }, 
+                                            :data => { :confirm => "Are you sure you want to delete #{personnel.full_name.titleize}?" }, 
                                             :class => "btn btn-xs btn-danger" %>
                             <% end %>                        
                         </td>
