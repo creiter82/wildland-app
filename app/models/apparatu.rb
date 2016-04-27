@@ -1,6 +1,8 @@
 class Apparatu < ActiveRecord::Base
   has_many :roster_apparatus
   has_many :rosters, through: :roster_apparatus
+  has_many :apparatu_positions
+  has_many :positions, through: :apparatu_positions
   validates :designator, presence: true, uniqueness: true
   validates_presence_of :apparatus_class, :apparatus_type
   before_save :downcase_designator, :downcase_apparatus_class
@@ -12,6 +14,8 @@ class Apparatu < ActiveRecord::Base
   def downcase_apparatus_class
     self.apparatus_class.downcase!
   end
+  
+  
   
   #def designator
   #  self[:designator].titleize

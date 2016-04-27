@@ -14,16 +14,30 @@
   <strong>End Date:</strong>
   <%= @roster.end_time.strftime("%m/%d/%Y") %>
 </p>
-<p>
-  <strong>Apparatus</strong>
-    <% if @roster.apparatus.size > 0 %>
-    <ul>
+
+  <% if @roster.apparatus.size > 0 %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Apparatus</th>
+        <th>Personnel</th>
+      </tr>
+    </thead>
+    <tbody>
       <% @roster.apparatus.each do |app| %>
-        <li><%= app.designator.titleize %></li>
+        <tr>
+          <td><%= app.designator.titleize %></td>
+          <td>
+            <% app.positions.each do |pos| %>
+              <%= pos.name.titleize %>:
+            <% end %>  
+          </td>
+        </tr>  
       <% end %>
-    </ul>  
-    <% end %>
-</p>
+    </tbody>
+  </table>  
+  <% end %>
+
 
 <% if current_personnel && current_personnel.admin? %>
   <%= link_to 'Edit', edit_roster_path(@roster), class: "btn btn-xs btn-primary" %> | 

@@ -23,15 +23,29 @@
       <div class="form-group">
         <%=f.label :apparatus_class, class: "col-sm-4 control-label" %>
         <div class="col-sm-4">
-          <%= f.select(:apparatus_class, options_for_select([['Engine'], ['Tender']]), {}, {class: "form-control"}) %>
+          <%= f.select(:apparatus_class, options_for_select([['Engine'], ['Tender']], f.object.apparatus_class), {}, {class: "form-control"}) %>
         </div>  
       </div>
       <div class="form-group">
         <%=f.label :apparatus_type, class: "col-sm-4 control-label" %>
         <div class="col-sm-4">
-          <%= f.select(:apparatus_type, options_for_select([[1], [2], [3], [4], [5], [6]]), {}, {class: "form-control"}) %>
+          <%= f.select(:apparatus_type, options_for_select([[1], [2], [3], [4], [5], [6]], f.object.apparatus_type), {}, {class: "form-control"}) %>
         </div>  
       </div>
+      
+      <%= fields_for(@apparatu, @apparatu.apparatu_positions.build) do |a| %>
+        <div class="form-group">
+          <%= a.label :positions, "Riding Positions", class: "col-sm-4 control-label" %>
+          <div class="collection-check-box col-sm-8">
+            <%= a.collection_check_boxes :position_ids, Position.all, :id, :name do |b| %>
+              
+                <%= b.check_box %>
+                <%= b.label %>
+              
+            <% end %> 
+          </div>  
+        </div>
+      <% end %>
       
       <div class="col-sm-4 col-sm-offset-4">
         <%= f.submit btn_name, class: "btn btn-xs btn-primary" %> | 

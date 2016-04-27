@@ -20,6 +20,7 @@ class ApparatusController < ApplicationController
 
   # GET /apparatus/1/edit
   def edit
+    @apparatu = Apparatu.find(params[:id])
   end
 
   # POST /apparatus
@@ -39,7 +40,7 @@ class ApparatusController < ApplicationController
   def update
     respond_to do |format|
       if @apparatu.update(apparatu_params)
-        format.html { redirect_to @apparatu, notice: 'Apparatu was successfully updated.' }
+        format.html { redirect_to apparatus_path, notice: 'Apparatus was successfully updated.' }
         format.json { render :show, status: :ok, location: @apparatu }
       else
         format.html { render :edit }
@@ -66,7 +67,7 @@ class ApparatusController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def apparatu_params
-      params.require(:apparatu).permit(:designator, :apparatus_class, :apparatus_type)
+      params.require(:apparatu).permit(:designator, :apparatus_class, :apparatus_type, position_ids:[])
     end
     
 end

@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426170821) do
+ActiveRecord::Schema.define(version: 20160426204908) do
+
+  create_table "apparatu_positions", force: :cascade do |t|
+    t.integer  "apparatu_id"
+    t.integer  "position_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "apparatus", force: :cascade do |t|
     t.string   "designator"
@@ -56,6 +63,8 @@ ActiveRecord::Schema.define(version: 20160426170821) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "positions", ["name"], name: "index_positions_on_name", unique: true
 
   create_table "qualifications", force: :cascade do |t|
     t.string   "name"
