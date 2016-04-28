@@ -13,6 +13,7 @@ class RostersController < ApplicationController
   # GET /rosters/1.json
   def show
     @roster = Roster.find(params[:id])
+    @positions = Position.all
   end
 
   # GET /rosters/new

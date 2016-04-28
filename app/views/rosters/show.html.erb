@@ -1,19 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @roster.name.titleize %>
-</p>
+<h2>
+  <%= @roster.name.titleize %> 
+  <small style="color: #b5121b;"><%= @roster.start_time.strftime("%m/%d/%Y") %> - <%= @roster.end_time.strftime("%m/%d/%Y") %></small>
+</h2>
 
-<p>
+<!--<p>
   <strong>Start Date:</strong>
-  <%= @roster.start_time.strftime("%m/%d/%Y") %>
+  <%#= @roster.start_time.strftime("%m/%d/%Y") %>
 </p>
 
 <p>
   <strong>End Date:</strong>
-  <%= @roster.end_time.strftime("%m/%d/%Y") %>
-</p>
+  <%#= @roster.end_time.strftime("%m/%d/%Y") %>
+</p>-->
 
   <!--<%# if @roster.apparatus.size > 0 %>
   <table class="table table-striped">
@@ -38,29 +38,43 @@
   </table>  
   <%# end %>-->
 
-  <% if @roster.apparatus.size > 0 %>
-    <% @roster.apparatus.each do |app| %>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Apparatus</th>
-            <% app.positions.each do |pos| %>
-              <th><%= pos.name.titleize %></th>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= app.designator.titleize %></td>
-            <% app.positions.each do |pos| %>
-              <td><%= pos.name.titleize %></td>
-            <% end %>  
-          </tr>
-        </tbody>
-      </table>  
-    <% end %>
-  <% end %>
+<% if @roster.apparatus.size > 0 %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Apparatus</th>
+        <% @positions.each do |pos| %>
+          <th><%= pos.name.titleize %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @roster.apparatus.each do |app| %>
+      <tr>
+        <td><%= app.designator.titleize %></td>
+        
+        <% @positions.each do |pos| %>
+          <% if app.positions.include? pos %>
+            <td>
+              <% app.positions.each do |poss| %>
+                  <% if poss.name == pos.name %>
+                    <%= poss.name.titleize %>
+                  <% end %>   
+              <% end %>
+            </td>
+          <% else %>
+            <td><i class="fa fa-user-times" aria-hidden="true"></i></td>
+          <% end %>  
+        <% end %>  
+      </tr> 
+    <% end %> 
+    </tbody>
+  </table> 
+<% end %> 
 
+<p class="notes">
+  <i class="fa fa-user-times" aria-hidden="true"></i> = Position not required
+</p>
 
 <% if current_personnel && current_personnel.admin? %>
   <%= link_to 'Edit', edit_roster_path(@roster), class: "btn btn-xs btn-primary" %> | 
@@ -70,3 +84,4 @@
 <% else %>
   <%= link_to 'Back', root_path, class: "no-bg" %>
 <% end %>  
+
