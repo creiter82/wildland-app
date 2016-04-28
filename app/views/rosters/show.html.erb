@@ -15,7 +15,7 @@
   <%= @roster.end_time.strftime("%m/%d/%Y") %>
 </p>
 
-  <% if @roster.apparatus.size > 0 %>
+  <!--<%# if @roster.apparatus.size > 0 %>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -24,18 +24,41 @@
       </tr>
     </thead>
     <tbody>
-      <% @roster.apparatus.each do |app| %>
+      <%# @roster.apparatus.each do |app| %>
         <tr>
-          <td><%= app.designator.titleize %></td>
+          <td><%#= app.designator.titleize %></td>
           <td>
-            <% app.positions.each do |pos| %>
-              <%= pos.name.titleize %>:
-            <% end %>  
+            <%# app.positions.each do |pos| %>
+              <%#= pos.name.titleize %>:
+            <%# end %>  
           </td>
         </tr>  
-      <% end %>
+      <%# end %>
     </tbody>
   </table>  
+  <%# end %>-->
+
+  <% if @roster.apparatus.size > 0 %>
+    <% @roster.apparatus.each do |app| %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Apparatus</th>
+            <% app.positions.each do |pos| %>
+              <th><%= pos.name.titleize %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= app.designator.titleize %></td>
+            <% app.positions.each do |pos| %>
+              <td><%= pos.name.titleize %></td>
+            <% end %>  
+          </tr>
+        </tbody>
+      </table>  
+    <% end %>
   <% end %>
 
 
