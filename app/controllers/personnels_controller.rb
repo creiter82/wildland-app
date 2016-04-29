@@ -49,7 +49,7 @@ class PersonnelsController < ApplicationController
   private 
   
     def personnel_params
-       params.require(:personnel).permit(:first_name, :last_name, :phone, 
+       params.require(:personnel).permit(:id, :first_name, :last_name, :phone, 
                                          :email, :password, :admin, 
                                          :single_resource,
                                          qualification_ids:[]) 
