@@ -43,12 +43,12 @@
                            class: "form-control"  %>
       </div>
     </div>
-    <div class="form-group">
-      <%= f.label :current_password, class: "col-sm-4 control-label" %>
+    <!--<div class="form-group">
+      <%#= f.label :current_password, class: "col-sm-4 control-label" %>
       <div class="col-sm-8">
-          <%= f.password_field :current_password, class: "form-control" %>
+          <%#= f.password_field :current_password, class: "form-control" %>
       </div>
-    </div>
+    </div>-->
     <% if current_personnel.admin? %>
         <div class="form-group">
             <%= f.label :admin, class: "col-sm-4 control-label" %>
