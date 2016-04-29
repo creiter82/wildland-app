@@ -51,7 +51,8 @@ class PersonnelsController < ApplicationController
     def personnel_params
        params.require(:personnel).permit(:first_name, :last_name, :phone, 
                                          :email, :password, :admin, 
-                                         :single_resource) 
+                                         :single_resource,
+                                         qualification_ids:[]) 
     end
     
     def able_to_edit

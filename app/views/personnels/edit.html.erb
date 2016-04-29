@@ -64,6 +64,21 @@
             </div>
         </div>
         
+        <%= fields_for(@personnel, @personnel.personnel_qualifications.build) do |f| %>
+          <div class="form-group">
+            <%= f.label :qualifications, class: "col-sm-4 control-label" %>
+            <div class="collection-check-box col-sm-8">
+              <%= f.collection_check_boxes :qualification_ids, Qualification.all, 
+                                            :id, :name do |b| %>
+                <div class="check-box form-control no-border">                            
+                  <%= b.check_box %>
+                  <%= b.label %>
+                </div>
+              <% end %>  
+            </div>
+          </div>
+        <% end %>
+        
     <% end %>
     <div class="col-sm-8 col-sm-offset-4">
         <%= f.submit "Upate Personnel", class: "btn btn-xs btn-primary" %> | 
@@ -72,34 +87,3 @@
   <% end %>
 </div> 
 
-<% if current_personnel.admin? %>
-  <div class="col-md-6">
-    <h3 class="text-center">IQS Quals</h3>
-    
-    <% if @quals.size > 0 %>
-      <div class="col-md-6 col-md-offset-3">
-        <table class="table table-striped">
-          <thead>
-              <tr>
-                  <th>Qual</th>
-                  <th class="text-right">Actions</th>
-              </tr>
-          </thead>
-          <tbody>
-            <% @quals.each do |qual| %>
-              <tr>
-                <td><%= qual.acronym.upcase %></td>
-                <td class="text-right">
-                  <% if @personnel.can_add_qual?(qual.name) %>
-                    <%= link_to 'Add', personnel_qualifications_path(personnel_id: @personnel.id, qualification_id: qual.id), 
-                                        class: "btn btn-xs btn-success", method: :post%> 
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>  
-          </tbody>
-        </table>
-      </div>
-    <% end %>
-  </div>
-<% end %>  

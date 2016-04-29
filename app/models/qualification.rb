@@ -13,4 +13,8 @@ class Qualification < ActiveRecord::Base
       self.acronym.downcase!
     end
     
+    def name
+      self[:name].titleize
+    end
+    
 end

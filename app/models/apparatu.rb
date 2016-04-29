@@ -17,8 +17,8 @@ class Apparatu < ActiveRecord::Base
   
   
   
-  #def designator
-  #  self[:designator].titleize
-  #end
+  def designator
+    self[:designator].titleize
+  end
     
 end
