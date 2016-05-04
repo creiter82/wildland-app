@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160429210110) do
+ActiveRecord::Schema.define(version: 20160503223158) do
 
   create_table "apparatu_positions", force: :cascade do |t|
     t.integer  "apparatu_id"
