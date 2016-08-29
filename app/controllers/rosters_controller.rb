@@ -13,7 +13,7 @@ class RostersController < ApplicationController
   # GET /rosters/1.json
   def show
     @roster = Roster.find(params[:id])
-    @positions = Position.all
+    @positions = @roster.apparatus.collect{|a| a.positions}.flatten.uniq
   end
 
   # GET /rosters/new

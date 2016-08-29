@@ -50,20 +50,20 @@
       <% @roster.apparatus.each do |app| %>
       <tr>
         <td><%= app.designator.titleize %></td>
-        
-        <% @positions.each do |pos| %>
-          <% if app.positions.include? pos %>
-            <td>
-              <% app.positions.each do |poss| %>
-                  <% if poss.name == pos.name %>
-                    <%= poss.name.titleize %>
-                  <% end %>   
-              <% end %>
-            </td>
-          <% else %>
-            <td><i class="fa fa-user-times" aria-hidden="true"></i></td>
-          <% end %>  
-        <% end %>  
+              
+        <% @positions.each do |poss| %>
+          <td>
+            <% if assignment = @roster.assignments.find{|a| a.position_id == poss.id && a.apparatu_id == app.id} %>
+              <%= assignment.personnel.full_name %>
+            <% elsif unfilled_pos = app.positions.find{|p| p.id == poss.id}%>
+              <!--need someone-->
+              <%= link_to 'Signup', assignments_path(roster_id: @roster.id, position_id: unfilled_pos.id, apparatu_id: app.id), class: "btn btn-xs btn-primary" %>
+            <% else %>
+              <i class="fa fa-user-times" aria-hidden="true"></i>
+            <% end %> 
+          </td>
+        <% end %>
+              
       </tr> 
     <% end %> 
     </tbody>
