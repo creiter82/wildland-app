@@ -53,14 +53,25 @@
               
         <% @positions.each do |poss| %>
           <td>
-            <% if assignment = @roster.assignments.find{|a| a.position_id == poss.id && a.apparatu_id == app.id} %>
-              <%= assignment.personnel.full_name %>
-            <% elsif unfilled_pos = app.positions.find{|p| p.id == poss.id}%>
-              <!--need someone-->
-              <%= link_to 'Signup', assignments_path(roster_id: @roster.id, position_id: unfilled_pos.id, apparatu_id: app.id), class: "btn btn-xs btn-primary" %>
-            <% else %>
-              <i class="fa fa-user-times" aria-hidden="true"></i>
-            <% end %> 
+            
+              <% if assignment = @roster.assignments.find{|a| a.position_id == poss.id && a.apparatu_id == app.id} %>
+                <%= assignment.personnel.full_name %>
+              <% elsif unfilled_pos = app.positions.find{|p| p.id == poss.id}%>
+                <!--need someone-->
+                <div class="signup-action" data-apparatu-id="<%= app.id %>" data-position-id="<%= unfilled_pos.id %>">
+                  <%#= link_to 'Signup', assignments_path(roster_id: @roster.id, position_id: unfilled_pos.id, apparatu_id: app.id), class: "btn btn-xs btn-primary" %>
+                
+                  <%= form_for Assignment.new, remote: true do |f| %>
+                    <%= f.hidden_field :roster_id, value: @roster.id %>
+                    <%= f.hidden_field :position_id, value: unfilled_pos.id %>
+                    <%= f.hidden_field :apparatu_id, value: app.id %>
+                    <%= f.submit 'Signup', class: "btn btn-xs btn-primary" %>
+                  <% end %>
+                </div>
+              <% else %>
+                <i class="fa fa-user-times" aria-hidden="true"></i>
+              <% end %> 
+            
           </td>
         <% end %>
               
