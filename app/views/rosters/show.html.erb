@@ -3,39 +3,6 @@
   <small style="color: #b5121b;"><%= @roster.start_time.strftime("%m/%d/%Y") %> - <%= @roster.end_time.strftime("%m/%d/%Y") %></small>
 </h2>
 
-<!--<p>
-  <strong>Start Date:</strong>
-  <%#= @roster.start_time.strftime("%m/%d/%Y") %>
-</p>
-
-<p>
-  <strong>End Date:</strong>
-  <%#= @roster.end_time.strftime("%m/%d/%Y") %>
-</p>-->
-
-  <!--<%# if @roster.apparatus.size > 0 %>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Apparatus</th>
-        <th>Personnel</th>
-      </tr>
-    </thead>
-    <tbody>
-      <%# @roster.apparatus.each do |app| %>
-        <tr>
-          <td><%#= app.designator.titleize %></td>
-          <td>
-            <%# app.positions.each do |pos| %>
-              <%#= pos.name.titleize %>:
-            <%# end %>  
-          </td>
-        </tr>  
-      <%# end %>
-    </tbody>
-  </table>  
-  <%# end %>-->
-
 <% if @roster.apparatus.size > 0 %>
   <table class="table table-striped">
     <thead>
@@ -57,17 +24,20 @@
               <% if assignment = @roster.assignments.find{|a| a.position_id == poss.id && a.apparatu_id == app.id} %>
                 <%= assignment.personnel.full_name %>
               <% elsif unfilled_pos = app.positions.find{|p| p.id == poss.id}%>
-                <!--need someone-->
-                <div class="signup-action" data-apparatu-id="<%= app.id %>" data-position-id="<%= unfilled_pos.id %>">
-                  <%#= link_to 'Signup', assignments_path(roster_id: @roster.id, position_id: unfilled_pos.id, apparatu_id: app.id), class: "btn btn-xs btn-primary" %>
-                
-                  <%= form_for Assignment.new, remote: true do |f| %>
-                    <%= f.hidden_field :roster_id, value: @roster.id %>
-                    <%= f.hidden_field :position_id, value: unfilled_pos.id %>
-                    <%= f.hidden_field :apparatu_id, value: app.id %>
-                    <%= f.submit 'Signup', class: "btn btn-xs btn-primary" %>
-                  <% end %>
-                </div>
+                <% if current_personnel %>
+                  <div class="signup-action" data-apparatu-id="<%= app.id %>" data-position-id="<%= unfilled_pos.id %>">
+                    <%#= link_to 'Signup', assignments_path(roster_id: @roster.id, position_id: unfilled_pos.id, apparatu_id: app.id), class: "btn btn-xs btn-primary" %>
+                  
+                    <%= form_for Assignment.new, remote: true do |f| %>
+                      <%= f.hidden_field :roster_id, value: @roster.id %>
+                      <%= f.hidden_field :position_id, value: unfilled_pos.id %>
+                      <%= f.hidden_field :apparatu_id, value: app.id %>
+                      <%= f.submit 'Signup', class: "btn btn-xs btn-primary" %>
+                    <% end %>
+                  </div>
+                <% else %>
+                  Vacant
+                <% end %>
               <% else %>
                 <i class="fa fa-user-times" aria-hidden="true"></i>
               <% end %> 

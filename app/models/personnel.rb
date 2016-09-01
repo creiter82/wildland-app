@@ -5,6 +5,7 @@ class Personnel < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :personnel_qualifications, dependent: :destroy
   has_many :qualifications, through: :personnel_qualifications
+  has_many :assignments, dependent: :destroy
   validates_presence_of :first_name, :last_name
   validates :phone,:presence => true,
                    :length => { :minimum => 10, :maximum => 10 }

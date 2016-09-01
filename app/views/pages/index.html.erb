@@ -1,7 +1,7 @@
 <div class="jumbotron">
   <h1>Welcome to AFR's Wildland Roster App!</h1>
   <p>Pride, Integrity, Service</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+  <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>-->
 </div>
 
 <div>
@@ -19,7 +19,8 @@
   
     <tbody>
       <% @rosters.each do |roster| %>
-        <% if roster.start_time >= Date.today.beginning_of_week && roster.start_time <= Date.today.end_of_week %>
+        <% if roster.start_time >= Date.today.beginning_of_week && 
+                                   roster.start_time <= Date.today.end_of_week %>
           <tr>
             <td><%= roster.name.titleize %></td>
             <td><%= roster.start_time.strftime("%m/%d/%Y") %></td>

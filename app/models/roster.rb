@@ -1,7 +1,7 @@
 class Roster < ActiveRecord::Base
   has_many :roster_apparatus
   has_many :apparatus, through: :roster_apparatus
-  has_many :assignments
+  has_many :assignments, dependent: :destroy
   before_save :downcase_name
   validates :name, presence: true
   validates :start_time, presence: true, uniqueness: true
