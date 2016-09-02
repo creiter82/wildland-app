@@ -17,13 +17,13 @@
         <div class="form-group">
             <%= f.label :name, class: "col-sm-2 control-label" %>
             <div class="col-sm-4">
-                <%= f.text_field :name, class: "form-control" %>
+                <%= f.text_field :name, :placeholder => "john doe", autofocus: "true", class: "form-control" %>
             </div>    
         </div>
         <div class="form-group">
             <%= f.label :acronym, class: "col-sm-2 control-label" %>
             <div class="col-sm-4">
-                <%= f.text_field :acronym, class: "form-control" %>
+                <%= f.text_field :acronym, :placeholder => "engb", class: "form-control" %>
             </div>    
         </div>
         <div class="col-sm-4 col-md-offset-2">

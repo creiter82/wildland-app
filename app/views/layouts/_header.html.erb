@@ -31,7 +31,7 @@
       <ul class="nav user-name navbar-right navbar-btn">
         <li>
           <i class="fa fa-user"></i>
-          <%= current_personnel.full_name.present? ? current_personnel.full_name : current_personnel.email %>
+          <%= current_personnel.full_name.present? ? current_personnel.full_name.titleize : current_personnel.email %>
         </li>
       </ul>
       <% else %>
