@@ -8,7 +8,7 @@
     <thead>
       <tr>
         <th>Apparatus</th>
-        <% @positions.each do |pos| %>
+        <% @positions.sort.each do |pos| %>
           <th><%= pos.name.titleize %></th>
         <% end %>
       </tr>
@@ -18,7 +18,7 @@
       <tr>
         <td><%= app.designator.titleize %></td>
               
-        <% @positions.each do |poss| %>
+        <% @positions.sort.each do |poss| %>
           <td>
             
               <% if assignment = @roster.assignments.find{|a| a.position_id == poss.id && a.apparatu_id == app.id} %>
