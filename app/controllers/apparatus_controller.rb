@@ -28,7 +28,7 @@ class ApparatusController < ApplicationController
   def create
     @apparatu = Apparatu.new(apparatu_params)
     if @apparatu.save
-      flash[:notice] = "Apparatus was created"
+      flash[:notice] = "#{@apparatu.name.titleize} was created"
       redirect_to apparatus_path
     else
       render 'new'
@@ -40,7 +40,7 @@ class ApparatusController < ApplicationController
   def update
     respond_to do |format|
       if @apparatu.update(apparatu_params)
-        format.html { redirect_to apparatus_path, notice: 'Apparatus was successfully updated.' }
+        format.html { redirect_to apparatus_path, notice: "#{@apparatu.name.titleize} was successfully updated." }
         format.json { render :show, status: :ok, location: @apparatu }
       else
         format.html { render :edit }
@@ -67,7 +67,7 @@ class ApparatusController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def apparatu_params
-      params.require(:apparatu).permit(:designator, :apparatus_class, :apparatus_type, position_ids:[])
+      params.require(:apparatu).permit(:name, :designator, :apparatus_class, :apparatus_type, position_ids:[])
     end
     
 end

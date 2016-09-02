@@ -4,8 +4,12 @@ class Apparatu < ActiveRecord::Base
   has_many :apparatu_positions
   has_many :positions, through: :apparatu_positions
   validates :designator, presence: true, uniqueness: true
-  validates_presence_of :apparatus_class, :apparatus_type
-  before_save :downcase_designator, :downcase_apparatus_class
+  validates_presence_of :name, :apparatus_class, :apparatus_type
+  before_save :downcase_name, :downcase_designator, :downcase_apparatus_class
+  
+  def downcase_name
+    self.name.downcase!
+  end
   
   def downcase_designator
     self.designator.downcase!

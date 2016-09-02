@@ -4,8 +4,9 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Designator</th>
       <th>Class</th>
-      <th>Type</th>
+      <th class="text-center">Type</th>
       <th>Riding Assignments</th>
       <th>Actions</th>
     </tr>
@@ -14,17 +15,25 @@
   <tbody>
     <% @apparatus.each do |apparatu| %>
       <tr>
+        <td><%= apparatu.name.titleize %></td>
         <td><%= apparatu.designator.titleize %></td>
         <td><%= apparatu.apparatus_class.capitalize %></td>
-        <td><%= apparatu.apparatus_type %></td>
+        <td class="text-center"><%= apparatu.apparatus_type %></td>
         <td>
-          <% apparatu.positions.each_with_index do |pos| %>
-            <em>[<%= pos.name.titleize %>]</em> 
-          <% end %>
+          <%# apparatu.positions.each_with_index do |pos| %>
+            <!--<em>[<%#= pos.name.titleize %>]</em> -->
+          <%# end %>
+          
+          <%= apparatu.positions.map{|p| p.name.titleize}.to_sentence(words_connector: ', ', 
+                                                      two_words_connector: ', ', 
+                                                      last_word_connector: ', ') %>
         </td>
         <td>
-          <%= link_to 'Edit', edit_apparatu_path(apparatu), class: "btn btn-xs btn-primary" %>
-          <%= link_to 'Destroy', apparatu, method: :delete, class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Edit', edit_apparatu_path(apparatu), 
+                                              class: "btn btn-xs btn-primary" %>
+          <%= link_to 'Destroy', apparatu, method: :delete, 
+                                              class: "btn btn-xs btn-danger", 
+                                              data: { confirm: "Are you sure you want to delete #{apparatu.name.titleize}?" } %>
         </td>
       </tr>
     <% end %>
