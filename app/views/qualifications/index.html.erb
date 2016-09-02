@@ -1,5 +1,5 @@
 <% if @qualifications.size > 0 %>
-    <h1>Qualifications</h1>
+    <h1>Qualifications <%= link_to "New Qual", new_qualification_path, class: "btn btn-s btn-primary" %></h1>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -28,4 +28,3 @@
     </table>
 <% end %>
 
-<%= link_to "New Qual", new_qualification_path, class: "btn btn-s btn-primary" %>

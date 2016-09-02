@@ -27,9 +27,13 @@
             <td><%= roster.end_time.strftime("%m/%d/%Y") %></td>
             <td>
               <% if roster.apparatus.size > 0 %>
-                <% roster.apparatus.each do |app| %>
-                  <%= app.designator.titleize %>
-                <% end %>  
+                <%# roster.apparatus.each do |app| %>
+                  <%#= app.designator.titleize %>
+                <%# end %>
+                
+                <%= roster.apparatus.map{|r| r.designator.titleize}.to_sentence(words_connector: ', ', 
+                                                      two_words_connector: ', ', 
+                                                      last_word_connector: ', ') %>
               <% end %>
             </td>
             <td>

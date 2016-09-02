@@ -59,6 +59,14 @@
     }
 }
 
+.custom-btn {
+    &:hover {
+        color: #fff !important;
+        background-color: #c9302c !important;
+        border-color: #ac2925 !important;
+    }
+}
+
 /* Personnel */
 
 .personnel-listing {
