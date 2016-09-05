@@ -20,6 +20,16 @@ class Personnel < ActiveRecord::Base
     personnel_qualifications.where(qualification_id: qual.id).exists?
   end
   
+  def can_signup?(roster)
+    !already_signed_up?(roster)
+  end
+  
+  def already_signed_up?(roster)
+    roster = Roster.find(roster)
+    return false unless roster
+    assignments.where(roster_id: roster.id).exists?
+  end
+  
   def full_name
     "#{first_name} #{last_name}"
   end

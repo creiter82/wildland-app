@@ -23,8 +23,13 @@
             
               <% if assignment = @roster.assignments.find{|a| a.position_id == poss.id && a.apparatu_id == app.id} %>
                 <%= assignment.personnel.full_name %>
+                <% if current_personnel.admin? %>
+                  <%= link_to 'Remove', assignment_path(assignment), method: :delete, 
+                                        class: "btn btn-xs btn-danger",
+                                        data: { confirm: "Remove #{assignment.personnel.full_name}?" } %>
+                <% end %>
               <% elsif unfilled_pos = app.positions.find{|p| p.id == poss.id}%>
-                <% if current_personnel %>
+                <% if current_personnel.can_signup?(@roster.id) #&& !current_personnel.assignments.where(roster_id: @roster.id).exists? %>
                   <div class="signup-action" data-apparatu-id="<%= app.id %>" data-position-id="<%= unfilled_pos.id %>">
                     <%#= link_to 'Signup', assignments_path(roster_id: @roster.id, position_id: unfilled_pos.id, apparatu_id: app.id), class: "btn btn-xs btn-primary" %>
                   
