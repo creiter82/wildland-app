@@ -29,7 +29,7 @@
                                         data: { confirm: "Remove #{assignment.personnel.full_name}?" } %>
                 <% end %>
               <% elsif unfilled_pos = app.positions.find{|p| p.id == poss.id}%>
-                <% if current_personnel.can_signup?(@roster.id) %>
+                <% if current_personnel.can_signup?(@roster.id) && current_personnel.is_qualified?(unfilled_pos) %>
                   <div class="signup-action" data-apparatu-id="<%= app.id %>" data-position-id="<%= unfilled_pos.id %>">
                     <%#= link_to 'Signup', assignments_path(roster_id: @roster.id, position_id: unfilled_pos.id, apparatu_id: app.id), class: "btn btn-xs btn-primary" %>
                   

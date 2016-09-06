@@ -30,6 +30,24 @@ class Personnel < ActiveRecord::Base
     assignments.where(roster_id: roster.id).exists?
   end
   
+  def is_qualified?(unfilled_pos)
+    position = Position.find_by_name(unfilled_pos.name)
+    if qualifications.where(acronym: "engb").exists? && position.name == "engine boss" ||  position.name == "firefighter #1"||  position.name == "firefighter #2"
+      return true
+    end
+    if qualifications.where(acronym: "enop").exists? && position.name == "engine operator"
+      return true
+    end
+    if qualifications.where(acronym: "fft1").exists? && position.name == "firefighter #1" || position.name == "firefighter #2"
+      return true
+    end
+    if qualifications.where(acronym: "fft2").exists? && position.name == "firefighter #1" || position.name == "firefighter #2"
+      return true
+    end
+  end
+  
+  
+  
   def full_name
     "#{first_name} #{last_name}"
   end
