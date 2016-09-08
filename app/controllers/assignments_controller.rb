@@ -17,9 +17,10 @@ class AssignmentsController < ApplicationController
    def destroy
       @assignment = Assignment.find(params[:id])
       @assignment.destroy
-      respond_to do |format|
-        format.html { redirect_to roster_url(@assignment.roster_id), notice: "#{@assignment.personnel.full_name} was removed from #{@assignment.roster.name.titleize}" }
-      end  
+      #respond_to do |format|
+        #format.html { redirect_to roster_url(@assignment.roster_id), notice: "#{@assignment.personnel.full_name} was removed from #{@assignment.roster.name.titleize}" }
+      #end 
+      redirect_to :back, notice: "#{@assignment.personnel.full_name} was removed from #{@assignment.roster.name.titleize}"
    end
    
    
