@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
        if @personnel.admin?
        else
            redirect_to(root_path)
-           flash[:danger] = "Must be an Admin to view"
+           flash[:danger] = "Must be admin!"
        end
     end
   

@@ -1,7 +1,7 @@
 class RostersController < ApplicationController
   before_action :authenticate_personnel!, except: [:show]
   before_action :set_roster, only: [:show, :edit, :update, :destroy]
-  before_action :is_admin?, only: [:destroy]
+  before_action :is_admin?, only: [:create, :new, :edit, :destroy]
 
   # GET /rosters
   # GET /rosters.json
