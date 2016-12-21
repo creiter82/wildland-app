@@ -31,6 +31,8 @@ class RostersController < ApplicationController
   # POST /rosters.json
   def create
     @roster = Roster.new(roster_params)
+    @roster.name = "week of #{@roster.start_time.strftime("%m/%d/%Y")}"
+    @roster.end_time = @roster.start_time.end_of_week
 
     respond_to do |format|
       if @roster.save

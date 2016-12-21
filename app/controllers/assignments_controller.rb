@@ -11,7 +11,12 @@ class AssignmentsController < ApplicationController
    def create
       @assignment = Assignment.new(assignment_params(params[:assignment]))
       @assignment.personnel = current_personnel
-      @assignment.save
+      already_signed_up = Assignment.find_by(roster_id: @assignment.roster.id, personnel_id: @assignment.personnel.id)
+      if already_signed_up
+         flash[:danger] = "You can only signup once per Roster"
+      else
+         @assignment.save
+      end
    end
    
    def destroy

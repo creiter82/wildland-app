@@ -52,3 +52,51 @@
     </tbody>
   </table>
 </div>
+
+<div>
+  <h3>Next Week's Roster</h3>
+  <table class="table table-striped roster-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Apparatus</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @rosters.each do |roster| %>
+        <% if roster.start_time == Date.today.next_week %>
+          <tr>
+            <td><%= roster.name.titleize %></td>
+            <td><%= roster.start_time.strftime("%m/%d/%Y") %></td>
+            <td><%= roster.end_time.strftime("%m/%d/%Y") %></td>
+            <td>
+              <% if roster.apparatus.size > 0 %>
+                <%# roster.apparatus.each do |app| %>
+                  <%#= app.designator.titleize %>
+                <%# end %>
+                
+                <%= roster.apparatus.map{|r| r.designator.titleize}.to_sentence(words_connector: ', ', 
+                                                      two_words_connector: ', ', 
+                                                      last_word_connector: ', ') %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to 'View', roster, class: "btn btn-xs btn-primary" %>                
+              <% if current_personnel && current_personnel.admin? %>  
+                <%= link_to 'Edit', edit_roster_path(roster), 
+                                    class: "btn btn-xs btn-success" %>
+                <%= link_to 'Destroy', roster, method: :delete, 
+                                    class: "btn btn-xs btn-danger", 
+                                    data: { confirm: 'Are you sure?' } %>
+              <% end %>                      
+            </td>
+          </tr>
+        <% end %>  
+      <% end %>
+    </tbody>
+  </table>
+</div>

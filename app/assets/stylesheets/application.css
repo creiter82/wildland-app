@@ -13,6 +13,7 @@
  *= require bootstrap_and_overrides
  *= require devise_bootstrap_views
  *= require simple_calendar
+ *= require bootstrap-datepicker
  *= require_tree .
  *= require_self
  */
