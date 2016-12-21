@@ -44,7 +44,9 @@
                                   class: "btn btn-xs btn-success" %>
               <%= link_to 'Destroy', roster, method: :delete, 
                                   class: "btn btn-xs btn-danger", 
-                                  data: { confirm: 'Are you sure?' } %>
+                                  data: { 
+                                    confirm: "Are you sure you want to delete the roster: #{roster.name.titleize}?" 
+                                  } %>
             <% end %>                      
           </td>
         </tr>
