@@ -6,9 +6,20 @@ class Personnel < ActiveRecord::Base
   has_many :personnel_qualifications, dependent: :destroy
   has_many :qualifications, through: :personnel_qualifications
   has_many :assignments, dependent: :destroy
+  before_save :downcase_name
   validates_presence_of :first_name, :last_name
   validates :phone,:presence => true,
-                   :length => { :minimum => 10, :maximum => 10 }
+                   :length => { :minimum => 10, :maximum => 10 },
+                   uniqueness: true
+                   
+  def downcase_name
+    self.first_name.downcase!
+    self.last_name.downcase!
+  end 
+  
+  def phone=(value)
+    self[:phone] = value.gsub(/[^0-9]/, '') 
+  end
                    
   def can_add_qual?(name)
     !qual_already_added?(name)

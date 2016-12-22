@@ -15,6 +15,13 @@
 
 @media (max-width: 768px) {
     .navbar {
+        .navbar-btn {
+            margin-top: 10px !important;
+            margin-bottom: 10px !important;
+        }
+        .navbar-nav {
+            margin-top: 0;
+        }
         .navbar-nav li a {
             /*line-height: 1em;*/
         }
@@ -29,7 +36,15 @@
         .login {
             .btn {
                 clear: none;
-                float: left;
+                float: right;
+                margin-right: 0;
+            }
+        }
+        .signup {
+            .btn {
+                clear: none;
+                float: right;
+                margin-right: 5px;
             }
         }
     }

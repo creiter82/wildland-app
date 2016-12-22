@@ -22,7 +22,7 @@
           <td>
             
               <% if assignment = @roster.assignments.find{|a| a.position_id == poss.id && a.apparatu_id == app.id} %>
-                <%= assignment.personnel.full_name %>
+                <%= assignment.personnel.full_name.titleize %>
                 <% if current_personnel.admin? %>
                   <%= link_to 'Remove', assignment_path(assignment), method: :delete, 
                                         class: "btn btn-xs btn-danger",

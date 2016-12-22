@@ -23,7 +23,7 @@ class PersonnelsController < ApplicationController
 
       if @personnel.update(personnel_params)
 
-        flash[:success] = "#{@personnel.full_name} was updated successfully"
+        flash[:success] = "#{@personnel.full_name.titleize} was updated successfully"
 
         redirect_to personnels_path
 

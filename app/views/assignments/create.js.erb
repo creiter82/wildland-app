@@ -1,1 +1,1 @@
-$(".signup-action[data-apparatu-id=<%= @assignment.apparatu_id %>][data-position-id=<%=@assignment.position_id%>]").html('<%= @assignment.personnel.full_name%>');
+$(".signup-action[data-apparatu-id=<%= @assignment.apparatu_id %>][data-position-id=<%=@assignment.position_id%>]").html('<%= @assignment.personnel.full_name.titleize%>');
