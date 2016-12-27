@@ -22,8 +22,8 @@
           <td>
             
               <% if assignment = @roster.assignments.find{|a| a.position_id == poss.id && a.apparatu_id == app.id} %>
-                <%= assignment.personnel.full_name.titleize %>
-                <% if current_personnel.admin? %>
+                <strong><%= assignment.personnel.full_name.titleize %></strong>
+                <% if current_personnel.try(:admin?) %>
                   <%= link_to 'Remove', assignment_path(assignment), method: :delete, 
                                         class: "btn btn-xs btn-danger",
                                         data: { confirm: "Remove #{assignment.personnel.full_name}?" } %>
@@ -41,9 +41,9 @@
                     <% end %>
                   </div>
                 <% elsif current_personnel && current_personnel.can_signup?(@roster.id) %>
-                  Not Qualified
+                  <em>Not Qualified</em>
                 <% else %>
-                  Need Personnel
+                  <em>Need Personnel</em>
                 <% end %>
               <% else %>
                 <i class="fa fa-user-times" aria-hidden="true"></i>
