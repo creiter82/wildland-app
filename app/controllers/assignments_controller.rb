@@ -17,6 +17,8 @@ class AssignmentsController < ApplicationController
       elsif @assignment.save
          flash[:notice] = "You are signed up"
          redirect_to :back
+         # add elsif if not using create.js
+         #along with flash notice and redirect
       end
    end
    
