@@ -33,10 +33,11 @@
                   <div class="signup-action" data-apparatu-id="<%= app.id %>" data-position-id="<%= unfilled_pos.id %>">
                     <%#= link_to 'Signup', assignments_path(roster_id: @roster.id, position_id: unfilled_pos.id, apparatu_id: app.id), class: "btn btn-xs btn-primary" %>
                   
-                    <%= form_for Assignment.new, remote: true do |f| %>
+                    <%= form_for Assignment.new do |f| %>
                       <%= f.hidden_field :roster_id, value: @roster.id %>
                       <%= f.hidden_field :position_id, value: unfilled_pos.id %>
                       <%= f.hidden_field :apparatu_id, value: app.id %>
+                      <%= f.hidden_field :personnel_id, value: current_personnel.id %><!-- add this to not use create.js -->
                       <%= f.submit 'Signup', class: "btn btn-xs btn-primary" %>
                     <% end %>
                   </div>

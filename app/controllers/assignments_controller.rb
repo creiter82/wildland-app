@@ -14,8 +14,9 @@ class AssignmentsController < ApplicationController
       already_signed_up = Assignment.find_by(roster_id: @assignment.roster.id, personnel_id: @assignment.personnel.id)
       if already_signed_up
          flash[:danger] = "You can only signup once per Roster"
-      else
-         @assignment.save
+      elsif @assignment.save
+         flash[:notice] = "You are signed up"
+         redirect_to :back
       end
    end
    
