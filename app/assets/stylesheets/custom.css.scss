@@ -93,9 +93,27 @@
     }
 }
 
+/* Roster */
+
+.roster-list {
+    margin-top: 40px;
+    .roster-list-personnel {
+        color: #888;
+        h4 {
+            color: #000;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .pos {
+            font-weight: bold;
+        }
+    }
+}
+
 /* Footer */
 
 footer {
     margin-top: 20px;
+    color: #999;
 }
 

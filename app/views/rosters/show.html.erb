@@ -1,7 +1,9 @@
 <h2>
   <%= @roster.name.titleize %> 
-  <small style="color: #b5121b;"><%= @roster.start_time.strftime("%m/%d/%Y") %> - <%= @roster.end_time.strftime("%m/%d/%Y") %></small>
 </h2>
+<h5>
+  Roster Dates <%= @roster.start_time.strftime("%m/%d/%Y") %> - <%= @roster.end_time.strftime("%m/%d/%Y") %>
+</h5>
 
 <% if @roster.apparatus.size > 0 %>
   <table class="table table-striped">
@@ -44,7 +46,11 @@
                 <% elsif current_personnel && current_personnel.can_signup?(@roster.id) %>
                   <em>Not Qualified</em>
                 <% else %>
-                  <em>Need Personnel</em>
+                  <% if current_personnel.try(:admin?) %>
+                    <%= link_to 'Add Person', '#', class: "btn btn-xs btn-primary" %>
+                  <% else %>
+                    <em>Need Personnel</em>
+                  <% end %>  
                 <% end %>
               <% else %>
                 <i class="fa fa-user-times" aria-hidden="true"></i>
@@ -63,12 +69,46 @@
   <i class="fa fa-user-times" aria-hidden="true"></i> = Position not required
 </p>
 
-<% if current_personnel && current_personnel.admin? %>
-  <%= link_to 'Edit', edit_roster_path(@roster), class: "btn btn-xs btn-primary" %> | 
-  <%= link_to 'Back', rosters_path, class: "no-bg" %>
-<% elsif current_personnel %>
-  <%= link_to 'Back', rosters_path, class: "no-bg" %>
-<% else %>
-  <%= link_to 'Back', root_path, class: "no-bg" %>
-<% end %>  
+<p class="links">
+  <% if current_personnel && current_personnel.admin? %>
+    <%= link_to 'Edit', edit_roster_path(@roster), class: "btn btn-xs btn-primary" %> | 
+    <%= link_to 'Back', rosters_path, class: "no-bg" %>
+  <% elsif current_personnel %>
+    <%= link_to 'Back', rosters_path, class: "no-bg" %>
+  <% else %>
+    <%= link_to 'Back', root_path, class: "no-bg" %>
+  <% end %> 
+</p>
+
+
+<% if @roster.apparatus.size > 0 %>
+  <div class="roster-list">
+    <h3>Personnel Contact Info</h3>
+    <% @roster.apparatus.each do |app| %>
+      <div class="col-md-12 roster-list-personnel">
+        <h4><%= app.name.titleize %></h4>
+          <% @positions.sort.each do |poss| %>
+            <% if assignment = @roster.assignments.find{|a| a.position_id == poss.id && a.apparatu_id == app.id} %> 
+              <div class="row">
+                <div class="col-md-2">
+                  <p class="pos"><%= assignment.position.name.titleize %></p> 
+                </div>
+                <div class="col-md-4 text-left">
+                  <p>
+                    <%= assignment.personnel.full_name.titleize %> 
+                    <span>
+                      <%= number_to_phone(assignment.personnel.phone, area_code: true) %>
+                    </span>
+                    <span>
+                      <%= link_to "Deploy", "#", class: "btn btn-xs btn-success"  %>
+                    </span>
+                  </p>
+                </div>
+              </div>  
+            <% end %> 
+          <% end %>
+      </div>
+    <% end %>
+  </div>  
+<% end %>
 
