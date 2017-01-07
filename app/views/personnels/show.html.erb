@@ -1,3 +1,36 @@
 <h2><%= @personnel.full_name.titleize %></h2>
-<p><strong>Phone </strong><span><%= number_to_phone(@personnel.phone, area_code: true) %></span></p>
-<p>Email <span><%= @personnel.email %></span></p>
+<p>
+    <%= link_to "Back", personnels_path, class: "back-btn" %>
+    <% if current_personnel == @personnel || current_personnel.admin? %>
+        | <%= link_to "Edit", edit_personnel_path(@personnel.id), class: "back-btn" %>
+    <% end %>    
+</p>
+
+<div class="personnel-show">
+    <div class="row">
+        <div class="col-md-2">
+            <p><strong>Phone </strong></p>
+        </div>
+        <div class="col-md-4 no-padding-left">
+            <p><%= number_to_phone(@personnel.phone, area_code: true) %></p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-2">
+            <p><strong>Email</strong></p>    
+        </div>
+        <div class="col-md-4 no-padding-left">
+            <p><%= @personnel.email %></p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-2">
+            <p><strong>Shift</strong></p>
+        </div>
+        <div class="col-md-4 shift-<%= @personnel.shift %> no-padding-left">
+            <p><%= @personnel.shift %></p>
+        </div>
+    </div>
+</div>

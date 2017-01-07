@@ -11,6 +11,7 @@ class Personnel < ActiveRecord::Base
   validates :phone,:presence => true,
                    :length => { :minimum => 10, :maximum => 10 },
                    uniqueness: true
+  validates :shift, :length => { :maximum => 1}                 
                    
   def downcase_name
     self.first_name.downcase!

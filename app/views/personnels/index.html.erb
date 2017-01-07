@@ -6,7 +6,8 @@
                 <tr>
                     <th>Name</th>
                     <th>Phone Number</th>
-                    <th>Email</th> 
+                    <th>Email</th>
+                    <th class="text-center">Shift</th>
                     <th>Quals</th>
                     <th class="text-center">Single Resource</th>
                     <th>Actions</th>
@@ -18,6 +19,13 @@
                         <td><%= personnel.full_name.titleize %></td>
                         <td><%= number_to_phone(personnel.phone, area_code: true) %></td>
                         <td><%= personnel.email %></td>
+                        <td class="text-center shift-<%= personnel.shift %>">
+                            <% if !personnel.shift.nil? %>
+                                <%= personnel.shift %>
+                            <% else %>
+                                Admin
+                            <% end %>    
+                        </td>
                         <td>
                         <% if personnel.qualifications.size > 0 %>
                             <ul>
@@ -35,7 +43,7 @@
                             <% end %>
                         </td>
                         <td>
-                            <%= link_to 'Show', personnel_path(personnel.id), class: "no-bg" %>
+                            <%= link_to 'View', personnel_path(personnel.id), class: "no-bg" %>
                             <% if current_personnel == personnel || current_personnel.admin? %>
                                 <%= link_to 'Edit', edit_personnel_path(personnel), 
                                                     :class => "btn btn-xs btn-primary" %>

@@ -50,7 +50,7 @@ class PersonnelsController < ApplicationController
   
     def personnel_params
        params.require(:personnel).permit(:id, :first_name, :last_name, :phone, 
-                                         :email, :single_resource,
+                                         :email, :single_resource, :shift,
                                          qualification_ids:[]) 
     end
     

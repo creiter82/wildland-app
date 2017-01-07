@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161221154351) do
+ActiveRecord::Schema.define(version: 20170107021517) do
 
   create_table "apparatu_positions", force: :cascade do |t|
     t.integer  "apparatu_id"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20161221154351) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "shift"
   end
 
   add_index "personnels", ["confirmation_token"], name: "index_personnels_on_confirmation_token", unique: true
