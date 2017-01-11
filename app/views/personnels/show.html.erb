@@ -8,29 +8,43 @@
 
 <div class="personnel-show">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 col-sm-2 col-xs-4">
             <p><strong>Phone </strong></p>
         </div>
-        <div class="col-md-4 no-padding-left">
+        <div class="col-md-4 col-sm-4 col-xs-4 no-padding-left">
             <p><%= number_to_phone(@personnel.phone, area_code: true) %></p>
         </div>
     </div>
     
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 col-sm-2 col-xs-4">
             <p><strong>Email</strong></p>    
         </div>
-        <div class="col-md-4 no-padding-left">
+        <div class="col-md-4 col-sm-4 col-xs-4 no-padding-left">
             <p><%= @personnel.email %></p>
         </div>
     </div>
     
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 col-sm-2 col-xs-4">
             <p><strong>Shift</strong></p>
         </div>
-        <div class="col-md-4 shift-<%= @personnel.shift %> no-padding-left">
+        <div class="col-md-4 col-sm-4 col-xs-4 shift-<%= @personnel.shift %> no-padding-left">
             <p><%= @personnel.shift %></p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-2 col-sm-2 col-xs-4">
+            <p><strong>Qualifications</strong></p>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-6 no-padding-left">
+            <% if @personnel.qualifications.size > 0 %>
+                <% @personnel.qualifications.order(:acronym).each do |qual| %>
+                        <%= qual.name.titleize %><br/>
+                <% end %>
+                </ul>
+            <% end %>
         </div>
     </div>
 </div>
