@@ -40,10 +40,31 @@
         </div>
         <div class="col-md-4 col-sm-4 col-xs-6 no-padding-left">
             <% if @personnel.qualifications.size > 0 %>
-                <% @personnel.qualifications.order(:acronym).each do |qual| %>
+                <p>
+                    <% @personnel.qualifications.order(:acronym).each do |qual| %>
                         <%= qual.name.titleize %><br/>
-                <% end %>
-                </ul>
+                    <% end %> 
+                </p>
+                
+            <% end %>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-2 col-sm-2 col-xs-4">
+            <p><strong>Signed Up On</strong></p>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4 no-padding-left">
+            <p><strong><%= pluralize( @personnel.assignments.count, 'Roster' ) %></strong></p>
+            <% if @personnel.assignments.size > 0 %>
+                <p>
+                    <% @personnel.assignments.each do |roster| %>
+                        <%= link_to roster.roster.name.capitalize, 
+                                    roster_path(roster.roster.id), 
+                                    class: "back-btn" %>: 
+                        <%= roster.position.name.capitalize %><br/>
+                    <% end %>
+                </p>
             <% end %>
         </div>
     </div>
