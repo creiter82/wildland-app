@@ -95,12 +95,14 @@
                 </div>
                 <div class="col-md-4 text-left">
                   <p>
-                    <%= assignment.personnel.full_name.titleize %> 
+                    <%= link_to assignment.personnel.full_name.titleize, personnel_path(assignment.personnel.id), class: "back-btn" %> 
                     <span>
                       <%= number_to_phone(assignment.personnel.phone, area_code: true) %>
                     </span>
                     <span>
-                      <%= link_to "Deploy", "#", class: "btn btn-xs btn-success"  %>
+                      <% if current_personnel.try(:admin?) %>
+                        <%= link_to "Deploy", "#", class: "btn btn-xs btn-success" %>
+                      <% end %>  
                     </span>
                   </p>
                 </div>
