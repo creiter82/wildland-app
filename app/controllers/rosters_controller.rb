@@ -14,6 +14,8 @@ class RostersController < ApplicationController
   def show
     @roster = Roster.find(params[:id])
     @positions = @roster.apparatus.collect{|a| a.positions}.flatten.uniq
+    @assignment = @roster.assignments.find{|a| a.roster_id == @roster.id }
+    #@assign = @assignment.id
   end
 
   # GET /rosters/new

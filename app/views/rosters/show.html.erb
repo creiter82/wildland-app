@@ -88,21 +88,38 @@
       <div class="col-md-12 roster-list-personnel">
         <h4><%= app.name.titleize %></h4>
           <% @positions.sort.each do |poss| %>
-            <% if assignment = @roster.assignments.find{|a| a.position_id == poss.id && a.apparatu_id == app.id} %> 
+            <% if @assign = @roster.assignments.find{|a| a.position_id == poss.id && a.apparatu_id == app.id} %> 
               <div class="row">
                 <div class="col-md-2">
-                  <p class="pos"><%= assignment.position.name.titleize %></p> 
+                  <p class="pos"><%= @assignment.position.name.titleize %></p> 
                 </div>
                 <div class="col-md-4 text-left">
                   <p>
-                    <%= link_to assignment.personnel.full_name.titleize, personnel_path(assignment.personnel.id), class: "back-btn" %> 
+                    <%= link_to @assign.personnel.full_name.titleize, personnel_path(@assign.personnel.id), class: "back-btn" %> 
                     <span>
-                      <%= number_to_phone(assignment.personnel.phone, area_code: true) %>
+                      <%= number_to_phone(@assign.personnel.phone, area_code: true) %>
                     </span>
                     <span>
                       <% if current_personnel.try(:admin?) %>
-                        <%= link_to "Deploy", "#", class: "btn btn-xs btn-success" %>
-                      <% end %>  
+                        <% if !@assign.deploy? %>
+                        
+                          <%#= form_for @assignment do |f| %>
+                            <%#= f.hidden_field :deploy, value: true %>
+                            <%#= f.submit 'Deploy', class: "btn btn-xs btn-success" %>
+                          <%# end %>
+                          
+                          <%#= @assign.id %>
+                      
+                          <%= link_to "Deploy", assignment_path(@assign, deploy: true), method: :put, class: "btn btn-xs btn-success" %>
+                        <% else %> 
+                          <%= link_to "Undo Deploy", assignment_path(@assign, deploy: false), method: :put, class: "btn btn-xs btn-danger" %>
+                        <% end %>  
+                      <% else %>
+                        <% if @assign.deploy %>
+                          <strong style="color: #FF0000;"><emd>Deployed</emd></strong>
+                        <% end %>
+                      <% end %>
+                      
                     </span>
                   </p>
                 </div>
