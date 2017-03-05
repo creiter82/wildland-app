@@ -68,4 +68,23 @@
             <% end %>
         </div>
     </div>
+    
+    <div class="row">
+        <div class="col-md-2 col-sm-2 col-xs-4">
+            <p><strong>Deployments</strong></p>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4 no-padding-left">
+            <p><strong><%= @personnel.assignments.where(deploy: true).count %></strong></p>
+            <% if @personnel.assignments.where(deploy: true).size > 0 %>
+                <p>
+                    <% @personnel.assignments.where(deploy: true).each do |roster| %>
+                        <%= link_to roster.roster.name.capitalize, 
+                                    roster_path(roster.roster.id), 
+                                    class: "back-btn" %>
+                    <% end %>
+                </p>
+            <% end %>
+            
+        </div>
+    </div>
 </div>
