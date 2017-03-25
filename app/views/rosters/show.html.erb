@@ -46,11 +46,12 @@
                 <% elsif current_personnel && current_personnel.can_signup?(@roster.id) %>
                   <em>Not Qualified</em>
                 <% else %>
-                  <% if current_personnel.try(:admin?) %>
-                    <%= link_to 'Add Person', '#', class: "btn btn-xs btn-primary" %>
-                  <% else %>
-                    <em>Need Personnel</em>
-                  <% end %>  
+                  <em>Need Personnel</em>
+                  <%# if current_personnel.try(:admin?) %>
+                    <%#= link_to 'Add Person', '#', class: "btn btn-xs btn-primary" %>
+                  <%# else %>
+                    <!--<em>Need Personnel</em>-->
+                  <%# end %>  
                 <% end %>
               <% else %>
                 <i class="fa fa-user-times" aria-hidden="true"></i>
