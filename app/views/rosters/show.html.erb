@@ -28,7 +28,7 @@
                 <% if current_personnel.try(:admin?) %>
                   <%= link_to 'Remove', assignment_path(assignment), method: :delete, 
                                         class: "btn btn-xs btn-danger",
-                                        data: { confirm: "Remove #{assignment.personnel.full_name}?" } %>
+                                        data: { confirm: "Remove #{assignment.personnel.full_name.titleize}?" } %>
                 <% end %>
               <% elsif unfilled_pos = app.positions.find{|p| p.id == poss.id}%>
                 <% if current_personnel && current_personnel.can_signup?(@roster.id) && current_personnel.is_qualified?(unfilled_pos) %>
@@ -43,6 +43,43 @@
                       <%= f.submit 'Signup', class: "btn btn-xs btn-primary" %>
                     <% end %>
                   </div>
+                  
+                <!-- Modal for manually signing up personnel -->  
+                <% elsif current_personnel.try(:admin?) %>
+                  <%#= link_to 'Add Person', '#', class: "btn btn-xs btn-primary" %>
+                  
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal<%= unfilled_pos.id %>">
+                    Add Person
+                  </button>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="myModal<%= unfilled_pos.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="myModalLabel">Add Person to Roster</h4>
+                        </div>
+                        <div class="modal-body">
+                          
+                          <%= form_for Assignment.new do |f| %>
+                            <%= f.hidden_field :roster_id, value: @roster.id %>
+                            <%= f.hidden_field :position_id, value: unfilled_pos.id %>
+                            <%= f.hidden_field :apparatu_id, value: app.id %>
+                            
+                            <%= collection_radio_buttons(:assignment, :personnel_id, Personnel.all, :id, :full_name) do |b| %>
+                              <p><%= b.label(:"data-value" => b.value) { b.radio_button + b.text.titleize } %></p>
+                            <% end %>  
+                            <%= f.submit 'Add Person', class: "btn btn-xs btn-primary" %>
+                          <% end %>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
                 <% elsif current_personnel && current_personnel.can_signup?(@roster.id) %>
                   <em>Not Qualified</em>
                 <% else %>
@@ -92,7 +129,7 @@
             <% if @assign = @roster.assignments.find{|a| a.position_id == poss.id && a.apparatu_id == app.id} %> 
               <div class="row">
                 <div class="col-md-2">
-                  <p class="pos"><%= @assignment.position.name.titleize %></p> 
+                  <p class="pos"><%= @assign.position.name.titleize %></p> 
                 </div>
                 <div class="col-md-4 text-left">
                   <p>

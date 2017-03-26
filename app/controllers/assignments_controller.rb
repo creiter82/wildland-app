@@ -10,7 +10,7 @@ class AssignmentsController < ApplicationController
    
    def create
       @assignment = Assignment.new(assignment_params(params[:assignment]))
-      @assignment.personnel = current_personnel
+      #@assignment.personnel = current_personnel
       already_signed_up = Assignment.find_by(roster_id: @assignment.roster.id, personnel_id: @assignment.personnel.id)
       if already_signed_up
          flash[:danger] = "You can only signup once per Roster"
@@ -48,9 +48,8 @@ class AssignmentsController < ApplicationController
       redirect_to :back, notice: "#{@assignment.personnel.full_name.titleize} was removed from #{@assignment.roster.name.titleize}"
    end
    
-   
    private
       def assignment_params(params)
-         params.permit(:apparatu_id, :roster_id, :position_id, :deploy)
+         params.permit(:apparatu_id, :roster_id, :position_id, :personnel_id, :deploy)
       end
 end
