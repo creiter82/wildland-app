@@ -67,10 +67,18 @@
                             <%= f.hidden_field :roster_id, value: @roster.id %>
                             <%= f.hidden_field :position_id, value: unfilled_pos.id %>
                             <%= f.hidden_field :apparatu_id, value: app.id %>
+                            <% Personnel.all.each do |p| %>
+                              <% if p.can_signup?(@roster.id) && p.is_qualified?(unfilled_pos) %>
+                                <p>
+                                  <%= f.radio_button :personnel_id, p.id %>
+                                  <%= f.label :personnel_id, p.full_name.titleize %>
+                                </p>
+                              <% end %>  
+                            <% end %>
                             
-                            <%= collection_radio_buttons(:assignment, :personnel_id, Personnel.all, :id, :full_name) do |b| %>
-                              <p><%= b.label(:"data-value" => b.value) { b.radio_button + b.text.titleize } %></p>
-                            <% end %>  
+                            <%#= collection_radio_buttons(:assignment, :personnel_id, Personnel.all, :id, :full_name) do |b| %>
+                              <!--<p><%#= b.label(:"data-value" => b.value) { b.radio_button + b.text.titleize } %></p>-->
+                            <%# end %>  
                             <%= f.submit 'Add Person', class: "btn btn-xs btn-primary" %>
                           <% end %>
                           
