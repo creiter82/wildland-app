@@ -113,6 +113,14 @@
 
 <p class="notes">
   <i class="fa fa-user-times" aria-hidden="true"></i> = Position not required
+</p> 
+
+<p class="notes text-center">
+  <strong>
+    <i class="fa fa-asterisk" aria-hidden="true"></i> Remember you must be
+    available for at least 16 days from the last day of the Roster 
+    <i class="fa fa-asterisk" aria-hidden="true"></i>
+  </strong>
 </p>
 
 <p class="links">
@@ -126,6 +134,51 @@
   <% end %> 
 </p>
 
+<% if current_personnel && current_personnel.can_signup?(@roster.id) %>  
+  <p>
+    <%= form_for Assignment.new do |f| %>
+      <%= f.hidden_field :roster_id, value: @roster.id %>
+      <%= f.hidden_field :personnel_id, value: current_personnel.id %>
+      <%= f.hidden_field :alternate, value: true %>
+      <%= f.submit 'Signup As Alternate', class: "btn btn-sm btn-success" %>
+    <% end %>
+  </p>
+<% end %> 
+
+<div class="alternates">
+  <h3>Alternates</h3>
+  <% @roster.assignments.order("created_at asc").each do |assign| %>
+    <% if assign.alternate? %>
+      <div class="row">
+        <div class="col-md-4">
+          <p>
+            <%= link_to assign.personnel.full_name.titleize,
+            personnel_path(assign.personnel.id), class: "back-btn" %>
+            <span>
+              <%= number_to_phone(assign.personnel.phone, area_code: true) %>
+            </span>
+            <span>
+              <% assign.personnel.qualifications.each do |qual| %>
+                <strong><%= qual.acronym.upcase %></strong>
+              <% end %>
+            </span>
+          </p>
+        </div>
+        <% if current_personnel == assign.personnel || current_personnel.try(:admin?) %>
+          <div class="col-md-2">
+            <p>
+              <%= link_to 'Remove to add to Roster', assignment_path(assign), method: :delete, 
+                                            class: "btn btn-xs btn-danger",
+                                            data: { confirm: "Remove #{assign.personnel.full_name.titleize}?" } %>
+            </p>                                
+          </div>
+        <% end %>  
+      </div>  
+    <% end %>
+  <% end %>
+</div>  
+
+<hr>
 
 <% if @roster.apparatus.size > 0 %>
   <div class="roster-list">
