@@ -63,7 +63,7 @@
                                     roster_path(roster.roster.id), 
                                     class: "back-btn" %>: 
                         <% if roster.alternate != true %>            
-                            <%= roster.position.name.capitalize %></br>
+                            <%= roster.position.name.titleize %></br>
                         <% else %>
                             Alternate</br>
                         <% end %>

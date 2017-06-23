@@ -16,7 +16,7 @@
     <% @apparatus.each do |apparatu| %>
       <tr>
         <td><%= apparatu.name.titleize %></td>
-        <td><%= apparatu.designator.titleize %></td>
+        <td><%= apparatu.designator.upcase %></td>
         <td><%= apparatu.apparatus_class.capitalize %></td>
         <td class="text-center"><%= apparatu.apparatus_type %></td>
         <td>

@@ -31,7 +31,7 @@
                   <%#= app.designator.titleize %>
                 <%# end %>
                 
-                <%= roster.apparatus.map{|r| r.designator.titleize}.to_sentence(words_connector: ', ', 
+                <%= roster.apparatus.map{|r| r.designator.upcase}.to_sentence(words_connector: ', ', 
                                                       two_words_connector: ', ', 
                                                       last_word_connector: ', ') %>
               <% end %>

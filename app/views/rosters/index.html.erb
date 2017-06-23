@@ -33,7 +33,7 @@
           <td>
             <% if roster.apparatus.size > 0 %>
               <% roster.apparatus.each do |app| %>
-                <%= app.designator.titleize %>
+                <%= app.designator.upcase %>
               <% end %>  
             <% end %>
           </td>

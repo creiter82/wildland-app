@@ -18,7 +18,7 @@
     <tbody>
       <% @roster.apparatus.each do |app| %>
       <tr>
-        <td><%= app.designator.titleize %></td>
+        <td><%= app.designator.upcase %></td>
               
         <% @positions.sort.each do |poss| %>
           <td>
