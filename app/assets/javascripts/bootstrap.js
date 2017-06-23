@@ -6,8 +6,3 @@ jQuery(function() {
 $('#myModal').modal({
     show: 'false'
 });
-
-var http = require("http");
-setInterval(function() {
-    http.get("http://aurorawildlandteam.herokuapp.com");
-}, 300000);
