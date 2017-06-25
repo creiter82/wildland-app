@@ -50,6 +50,6 @@ class AssignmentsController < ApplicationController
    
    private
       def assignment_params(params)
-         params.permit(:apparatu_id, :roster_id, :position_id, :personnel_id, :deploy, :alternate)
+         params.permit(:id, :apparatu_id, :roster_id, :position_id, :personnel_id, :deploy, :alternate)
       end
 end
