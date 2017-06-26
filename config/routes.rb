@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   resources :rosters, :path => "roster"
   resources :positions
   resources :assignments, only: [:index, :create, :update, :destroy]
+  
+  get 'send_mail/:id', to: 'rosters#send_mail', as: :send_mail
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

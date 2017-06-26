@@ -1,6 +1,6 @@
 class RostersController < ApplicationController
   before_action :authenticate_personnel!, except: [:show]
-  before_action :set_roster, only: [:show, :edit, :update, :destroy]
+  before_action :set_roster, only: [:show, :edit, :update, :send_email, :destroy]
   before_action :is_admin?, only: [:create, :new, :edit, :destroy]
 
   # GET /rosters
@@ -59,6 +59,24 @@ class RostersController < ApplicationController
         format.json { render json: @roster.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  #def send_order_mail
+    #@order = Order.find(params[:id])
+    #@client = Customer.find(@order.client_id)
+  
+    #OrderMailer.order_send(@order, @client).deliver
+    #flash[:notice] = "Order has been sent."
+    #redirect_to order_path(@order.id)
+  #end
+  
+  def send_mail
+    @roster = Roster.find(params[:id])
+    #@deploy = @roster.assignments.where(alternate: false)
+    @personnel = Personnel.all
+    DeploymentNotifier.send_deployment_roster(@roster, @personnel).deliver
+    flash[:notice] = "Deployment email has been sent."
+    redirect_to @roster
   end
 
   # DELETE /rosters/1

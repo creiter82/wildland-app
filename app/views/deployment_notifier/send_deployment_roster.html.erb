@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    </head>
+    <body>
+        <h1>
+            The following personnel have been deployed on a wildire;
+        </h1>
+        <% @roster.assignments.where(deploy: true).each do |assign| %>
+            <p><%= assign.personnel.full_name.titleize %></p>
+        <% end %>    
+    </body>
+</html>
