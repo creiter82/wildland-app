@@ -211,7 +211,7 @@
                       
                           <%= link_to "Deploy", assignment_path(@assign, deploy: true), method: :put, class: "btn btn-xs btn-success" %>
                         <% else %> 
-                          <%= link_to "Undo Deploy", assignment_path(@assign, deploy: false), method: :put, class: "btn btn-xs btn-danger" %>
+                          <%= link_to "Undo Deploy", assignment_path(@assign, deploy: false), method: :put, class: "btn btn-xs btn-warning" %>
                         <% end %>  
                       <% else %>
                         <% if @assign.deploy %>
@@ -227,6 +227,9 @@
           <% end %>
       </div>
     <% end %>
-  </div>  
+  </div>
+  
+  <%= deployment_email_helper(@roster) %>
+  
 <% end %>
 
