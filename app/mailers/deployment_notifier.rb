@@ -5,8 +5,9 @@ class DeploymentNotifier < ApplicationMailer
        @roster = roster
        @personnels = personnel
        emails = @personnels.collect(&:email).join(",")
-       mail( 
-           :to => [emails, 'fgray@auroragov.org', 'smills@auroragov.org', 'rfields@auroragov.org', 'kallen@auroragov.org'],
+       mail(
+           :to => 'reiter303@hotmail.com',
+           #:to => [emails, 'fgray@auroragov.org', 'smills@auroragov.org', 'rfields@auroragov.org', 'kallen@auroragov.org'],
            :subject => "AFR Wildland Deployment on #{Date.today}"
            )
     end
