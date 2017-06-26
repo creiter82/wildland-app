@@ -229,7 +229,9 @@
     <% end %>
   </div>
   
-  <%= deployment_email_helper(@roster) %>
+  <% if current_personnel.try(:admin?) %>
+    <%= deployment_email_helper(@roster) %>
+  <% end %>  
   
 <% end %>
 
