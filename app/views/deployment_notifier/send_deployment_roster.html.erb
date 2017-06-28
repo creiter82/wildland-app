@@ -8,8 +8,18 @@
         <h3>
             The following personnel have been deployed on a wildire:
         </h3>
-        <% @roster.assignments.where(deploy: true).each do |assign| %>
-            <p><%= assign.personnel.full_name.titleize %></p>
-        <% end %>    
+        
+        <% @roster.apparatus.each do |app| %>
+          <% if @roster.assignments.where(deploy: true, apparatu_id: app.id).any? %>
+            <% @time = @roster.assignments.where(deploy: true, apparatu_id: app.id).order("updated_at").last %>
+            <div>
+              <h4><%= app.name.titleize %> Deployed on <%= @time.updated_at.strftime("%a %b %d %Y") %> </h4>
+              <% @roster.assignments.where(deploy: true, apparatu_id: app.id).each do |assign| %>
+                  <p><%= assign.personnel.full_name.titleize %></p>
+              <% end %>
+            </div>  
+          <% end %>  
+        <% end %>  
+        
     </body>
 </html>
